@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:paddingTop="@dimen/component_up_margin_large"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageAudi"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/infiniti" />
+
+            <ImageButton
+                android:id="@+id/imageBmw"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/bmw"
+                />
+
+            <ImageButton
+                android:id="@+id/imageMerc"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/porche"
+                />
+
+            <ImageButton
+                android:id="@+id/imagePorc"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/mercedes"  />
+            <ImageButton
+                android:id="@+id/imageInf"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/audi"
+                />
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/component_up_margin"
+        android:layout_marginBottom="@dimen/component_up_margin"
+
+        android:background="@drawable/divider" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvShuffleCars"
+        android:padding="@dimen/container_padding"
+        android:scrollbars="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

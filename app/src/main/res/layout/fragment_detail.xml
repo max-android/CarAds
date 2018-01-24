@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailCoord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorScreen"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:theme="@style/AppTheme"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+          >
+
+            <ImageView
+                android:id="@+id/toolbarImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tbDetail"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/colorWhite"
+                app:subtitleTextColor="@color/colorWhite"
+                app:popupTheme="@style/AppTheme"
+                app:layout_collapseMode="pin"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/screen_padding">
+
+            <TextView
+                android:id="@+id/tvCarName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Марка"
+                android:textSize="24sp"
+                android:layout_marginStart="16dp"
+                style="@style/MyTitulTextStyle"
+                />
+
+            <TextView
+                android:id="@+id/tvTagDateIssue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCarName"
+                android:text="@string/date_issue"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvDateIssue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvСarPower"
+                android:layout_alignBottom="@+id/tvTagDateIssue"
+                tools:text="Год"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvTagMileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTagDateIssue"
+                android:text="@string/сar_mileage"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvCarMileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvСarPower"
+                android:layout_alignBottom="@+id/tvTagMileage"
+                tools:text="Пробег"
+                style="@style/MyTextStyle"
+                />
+
+            <TextView
+                android:id="@+id/tvTagСarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTagMileage"
+                android:text="@string/сar_value"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvСarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvСarPower"
+                android:layout_alignBottom="@+id/tvTagСarValue"
+                tools:text="Объем"
+                style="@style/MyTextStyle"
+                />
+            <TextView
+                android:id="@+id/tvTagСarPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTagСarValue"
+                android:text="@string/сar_power"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvСarPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detail_description_start"
+                android:layout_alignBottom="@+id/tvTagСarPower"
+                tools:text="Мощность"
+                style="@style/MyTextStyle"
+                />
+
+            <TextView
+                android:id="@+id/tvTagСarColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTagСarPower"
+                android:text="@string/сar_color"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvСarColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvСarPower"
+                android:layout_alignBottom="@+id/tvTagСarColor"
+                tools:text="Цвет"
+                style="@style/MyTextStyle"
+                />
+            <TextView
+                android:id="@+id/tvTagСarPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTagСarColor"
+                android:text="@string/сar_price"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/color_text_detail_hint"
+                style="@style/MyTextStyle" />
+
+            <TextView
+                android:id="@+id/tvСarPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvСarPower"
+                android:layout_alignBottom="@+id/tvTagСarPrice"
+                tools:text="Цена"
+                style="@style/MyTextStyle"
+                />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="16dp"
+    android:layout_below="@+id/tvTagСarPrice"
+    >
+
+    <Button
+        android:id="@+id/btnCall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:text="@string/btn_detail_call_text"
+        style="@style/MyButton"
+        />
+
+    <Button
+        android:id="@+id/btnWrite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:text="@string/btn_detail_write_text"
+        style="@style/MyButton"
+        />
+</LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

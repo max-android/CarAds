@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/screen_padding"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/view1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+       />
+
+    <TextView
+        android:id="@+id/tvAudi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_alignBottom="@+id/view1"
+        android:layout_toEndOf="@+id/view1"
+        android:textSize="24sp"
+        android:layout_centerVertical="true"
+
+        android:text="@string/audi" />
+
+    <ImageView
+        android:id="@+id/view2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/view1"
+        android:layout_below="@+id/view1"
+        android:layout_marginTop="8dp" />
+
+
+    <TextView
+        android:id="@+id/tvBmw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/view2"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_alignBottom="@+id/view2"
+
+        android:text="@string/bmw" />
+
+
+    <ImageView
+        android:id="@+id/view3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/view1"
+
+        android:layout_below="@+id/view2"
+        android:layout_marginTop="8dp" />
+
+
+    <TextView
+        android:id="@+id/tvInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/view3"
+
+        android:layout_alignBottom="@+id/view3"
+
+        android:text="@string/infinity" />
+    <ImageView
+        android:id="@+id/view4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+
+        android:layout_below="@+id/view3"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tvMers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/view4"
+        android:layout_alignBottom="@+id/view4"
+        android:text="@string/mers" />
+
+
+    <ImageView
+        android:id="@+id/view5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view4"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tvPorche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/view5"
+        android:layout_alignBottom="@+id/view5"
+        android:text="@string/porche" />
+
+</RelativeLayout>

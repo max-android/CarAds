@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimaryDark">#039BE5</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="colorScreen">#FFFFFF</color>
+
+    <color name="colorNavBarCenter">#29B6F6</color>
+    <color name="colorNavBarEnd">#03A9F4</color>
+    <color name="colorNavBarStart">#81D4FA</color>
+
+    <color name="btnSnack">#FF4081</color>
+
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorText">#000000</color>
+
+    <color name="color_text_hint">#EEEEEE</color>
+    <color name="color_text_detail_hint">#BDBDBD</color>
+
+
+
+    <color name="color_text_tab">#BDBDBD</color>
+
+    <color name="colorActive">#01579B</color>
+
+
+
+
+</resources>

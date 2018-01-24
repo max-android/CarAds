@@ -1,0 +1,133 @@
+<resources>
+    <string name="app_name">CarAds</string>
+
+
+    <string name="navigation_drawer_open">Открыть бар навигации</string>
+    <string name="navigation_drawer_close">Закрыть бар навигации</string>
+    <string name="select_marka">Выбрать марку</string>
+    <string name="show_ads">Показать объявления</string>
+    <string name="register">Войти или зарегистрироваться</string>
+    <string name="tv_register">Войдите или зарегистрируйтесь.Это даст вам расширенные возможности при использовании приложения,например использование своих объявлений и работа с ними</string>
+    <string name="action_register">Зарегистрироваться</string>
+    <string name="add_ads">Добавить объявление</string>
+
+    <string name="parol">Пароль</string>
+    <string name="name">Имя</string>
+    <string name="search_marka">Поиск по марке</string>
+    <string name="search_ads">Поиск объявлений</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="reset_password">Сбросить пароль</string>
+    <string name="sort">Выбрать автомобили:</string>
+    <string name="sort_marka">По марке</string>
+    <string name="sort_date">По дате</string>
+    <string name="sort_cost">По цене</string>
+    <string name="sort_color">По цвету</string>
+    <string name="sort_value">По объему двигателя</string>
+    <string name="sort_power">По мощности</string>
+    <string name="title_activity_searchable">SearchableActivity</string>
+    <string name="app_label">Поиск</string>
+    <string name="search_titul">Поиск</string>
+    <string name="search_hint">Найти марку авто</string>
+
+    <string name="audi">Audi</string>
+    <string name="bmw">BMW</string>
+    <string name="infinity">Infinity</string>
+    <string name="mers">Mercedes-Benz</string>
+    <string name="porche">Porsche</string>
+    <string name="from">от</string>
+    <string name="to">до</string>
+
+    <string name="orange">Оранжевый</string>
+    <string name="brown">Коричневый</string>
+    <string name="metal">Металлик</string>
+    <string name="blue1">Синий</string>
+    <string name="blue2">Голубой</string>
+    <string name="black">Черный</string>
+    <string name="aurum">Золотой</string>
+    <string name="white">Белый</string>
+    <string name="yellow">Желтый</string>
+    <string name="red">Красный</string>
+    <string name="grey">Серый</string>
+    <string name="setting">Настройки</string>
+    <string name="my_ads">Мои объявления</string>
+    <string name="favorites">Избранное</string>
+
+
+
+
+    <string name="date_issue">Год выпуска</string>
+    <string name="сar_mileage">Пробег автомобиля</string>
+    <string name="сar_value">Объем двигателя</string>
+    <string name="сar_power">Мощность двигателя</string>
+    <string name="сar_color">Цвет автомобиля</string>
+    <string name="сar_price">Цена автомобиля</string>
+
+    <string name="btn_detail_call_text">Позвонить</string>
+    <string name="btn_detail_write_text">Написать</string>
+
+    <string name="rubles">Р</string>
+    <string name="l_s">л.с.</string>
+    <string name="litr">л</string>
+    <string name="year">г</string>
+
+
+    <string name="message">Попробуйте проверить связь!!!</string>
+    <string name="detail">Детали</string>
+    <string name="favorite">Избранное</string>
+    <string name="map">На карте</string>
+    <string name="share_message">Привет! Хочу поделиться с тобой объявлением о продажи автомобиля:</string>
+    <string name="save_image">Сохранить</string>
+
+    <string name="yes">Да</string>
+
+
+    <string name="successful_save">Объявление сохранено</string>
+
+    <string name="empty_favorites">У вас пока нет избранных объявлений</string>
+
+
+    <string name="error_save">Объявление ранее сохранено</string>
+    <string name="select_ad">Выбранное объявление</string>
+    <string name="question">Удалите из избранного или перейдите в детали:</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+
+
+    <string name="delete_entry">Запись удалена</string>
+
+
+    <string name="dialog_image_error">Подключите интернет</string>
+
+
+    <string name="not_found_ads">Избранные объявления отсутствуют</string>
+
+
+
+    <string name="image_save_successful">Картинка  сохранена по пути:</string>
+    <string name="data_save_successful">Данные сохранены в файл TXT по пути:</string>
+
+    <string name="save_error_data">Данные не сохранены</string>
+
+
+    <string name="permission_explanation">Для сохранения картинок приложению требуется доступ к файловой системе</string>
+
+    <string name="save_in_pictures">Картинка  сохранена в папке Pictures</string>
+    <string name="save_into_Pictures">Сохранить в Pictures</string>
+    <string name="save_into_sdcard">Сохранить объявление на sdcard</string>
+    <string name="save_into_internal">Сохранить объявление в приложении</string>
+
+    <string name="image_saved_internal">Картинка сохранена в приложении</string>
+    <string name="data_saved_internal">Объявление сохранено в приложении по пути:</string>
+
+
+    <string name="permission_granted">Разрешение на чтение и запись файлов было предоставлено</string>
+    <string name="permission_denied">Чтение и запись файлов запрещена</string>
+
+    <string name="message_setting">Получение доступа к хранилищу</string>
+
+
+    <string name="directory_not_available">SDCARD не доступна в данный момент</string>
+
+    <string name="key">AIzaSyCvw8LuGJ2fhBwtFLrQErnIM1H2QGH8Qvw</string>
+
+</resources>

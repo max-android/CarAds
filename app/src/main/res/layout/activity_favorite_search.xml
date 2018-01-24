@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_favorite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/container_padding"
+    tools:context="com.example.carads.ui.myads.MyAdsActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarFavorites"
+        app:subtitleTextColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/toolbar_elevation"
+        >
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerFavorites"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tvInfoFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MyTitulTextStyle"
+        android:textColor="@color/colorAccent"
+        android:padding="@dimen/container_padding"
+        android:gravity="center_vertical"
+        android:text="@string/empty_favorites" />
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/component_up_margin_large"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/showAdsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ButtonTheme"
+        android:text="@string/show_ads" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/component_up_margin_large"
+        android:layout_marginBottom="@dimen/component_up_margin_large"
+        android:background="@drawable/divider" />
+
+    <TextView
+        android:id="@+id/tvIndoReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_register" />
+
+    <Button
+        android:id="@+id/registrBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ButtonTheme"
+        android:layout_marginTop="@dimen/component_up_margin"
+        android:text="@string/register" />
+
+</LinearLayout>
+
+
+    <!--android:foreground="?selectableItemBackground"-->

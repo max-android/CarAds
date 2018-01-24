@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/search_ads"
+             />
+
+        <item
+            android:id="@+id/nav_favor"
+            android:icon="@drawable/ic_favorite_search"
+            android:title="@string/favorites" />
+        <item
+            android:id="@+id/nav_my_ads"
+            android:icon="@drawable/ic_my_ads"
+            android:title="@string/my_ads"
+            />
+
+    </group>
+
+    <item
+
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_add"
+                android:icon="@drawable/ic_add_ads"
+                android:title="@string/add_ads" />
+
+        </menu>
+    </item>
+
+    <item android:title=""
+
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/setting" />
+
+        </menu>
+
+</item>
+</menu>
