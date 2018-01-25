@@ -66,4 +66,18 @@
     <dimen name="card_radius">2dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
     <!--<dimen name="card_padding">8dp</dimen>-->
+
+
+    <style name="MyHintText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/indigo</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+
+
 </resources>

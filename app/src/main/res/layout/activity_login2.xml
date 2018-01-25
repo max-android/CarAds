@@ -41,7 +41,7 @@
                     android:id="@+id/email_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name"
+                    android:hint="@string/email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:textSize="15sp" />
@@ -67,21 +67,21 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/sign_in_button"
+                android:id="@+id/sign_in_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/action_sign_in" />
 
             <Button
-                android:id="@+id/register_button"
+                android:id="@+id/register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/action_register" />
 
             <Button
-                android:id="@+id/reset_button"
+                android:id="@+id/reset_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

@@ -91,6 +91,8 @@ public class SaveFragment extends Fragment {
 
         toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
         toolbar.setSubtitle(car.getName());
+
+
         //toolbar.setTitle(car.getName());
 
       //  notification = new Notification(view.findViewById(R.id.scrollSave),getContext());

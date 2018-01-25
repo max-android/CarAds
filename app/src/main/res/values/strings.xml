@@ -12,7 +12,7 @@
     <string name="add_ads">Добавить объявление</string>
 
     <string name="parol">Пароль</string>
-    <string name="name">Имя</string>
+    <string name="email">Email</string>
     <string name="search_marka">Поиск по марке</string>
     <string name="search_ads">Поиск объявлений</string>
     <string name="action_sign_in">Войти</string>
@@ -129,5 +129,31 @@
     <string name="directory_not_available">SDCARD не доступна в данный момент</string>
 
     <string name="key">AIzaSyCvw8LuGJ2fhBwtFLrQErnIM1H2QGH8Qvw</string>
+
+
+
+    <string name="loading">загрузка</string>
+
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+
+    <string name="sign_out">Выйти</string>
+    <string name="verify_email">Подтвердить Email</string>
+
+    <string name="signed_out">Нет пользователя</string>
+    <string name="authentication_failed">Ошибка аутентификации</string>
+
+
+    <string name="send_verif_email">Отправлено сообщение для провекри пользователю по адресу:</string>
+
+
+    <string name="failed_send_verification_email">Не удалось отправить подтверждение по электронной почте</string>
+
+
+    <string name="register_user">Регистрация пользователя</string>
+
+
+
+
+
 
 </resources>

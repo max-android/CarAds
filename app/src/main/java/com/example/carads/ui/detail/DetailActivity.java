@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -109,6 +110,10 @@ private void launchAdFromFavorites(){
         bundle.putSerializable(Constants.KEY_FRAG,car);
         detailFragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.frame,detailFragment).commitAllowingStateLoss();
+        Menu menu = navigation.getMenu();
+        menu.getItem(0).setChecked(true);
+        menu.getItem(0).setCheckable(true);
+        //menu.getItem(0).setEnabled(true);
 
     }
 
