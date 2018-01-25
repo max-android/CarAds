@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "880491966012",
+    "firebase_url": "https://carads-15364.firebaseio.com",
+    "project_id": "carads-15364",
+    "storage_bucket": "carads-15364.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880491966012:android:ee7247facc4a67c0",
+        "android_client_info": {
+          "package_name": "com.example.carads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880491966012-nes1b9kjcm8v339ee4co31ec64iqrrgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carads",
+            "certificate_hash": "2211b34ab3ca8644769ba33d18e25a818a176558"
+          }
+        },
+        {
+          "client_id": "880491966012-nf4n52t33as54pctiu9js27vgua8t0sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoctT8JGSInr5uAGv-oMT8WjwthEUkFss"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880491966012-nf4n52t33as54pctiu9js27vgua8t0sd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
