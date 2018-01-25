@@ -22,6 +22,8 @@ import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Dialog;
 import com.example.carads.ui.utilities.Notification;
+import com.example.carads.ui.utilities.Picture;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -151,13 +153,11 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
     public void onCarClick(Car car) {
 
 
-
-
-
 new Thread(()->{
 
     try {
-        Drawable drawable  = drawableFromUrl(car.getImage());
+        Drawable drawable  = new Picture().drawableFromUrl(car.getImage());
+       // Drawable drawable  = drawableFromUrl(car.getImage());
         runOnUiThread(()->showDialog(drawable,car));
 
     } catch (Exception e) {

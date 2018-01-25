@@ -79,9 +79,6 @@ public class SaveFragment extends Fragment {
     private void initialData(){
 
         car = (Car)getArguments().getSerializable(Constants.KEY_FRAG);
-
-        //Log.d("Car ",  car.getName());
-
     }
 
 

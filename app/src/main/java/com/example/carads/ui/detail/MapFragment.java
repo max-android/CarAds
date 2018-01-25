@@ -1,5 +1,6 @@
 package com.example.carads.ui.detail;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,21 +11,22 @@ import android.view.ViewGroup;
 
 import com.example.carads.R;
 import com.example.carads.storage.database.entity.Car;
+import com.example.carads.ui.callbacks.SetFunc;
 import com.example.carads.ui.utilities.Constants;
+import com.example.carads.ui.utilities.Picture;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Created by Максим on 15.01.2018.
  */
 
-public class MapFragment extends SupportMapFragment  {
+public class MapFragment extends Fragment  {
 
-
-   // private GoogleMap mMap;
 
     private Car car;
 
@@ -35,7 +37,6 @@ public class MapFragment extends SupportMapFragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         return inflater.inflate(R.layout.fragment_map,container,false);
     }
 
@@ -43,22 +44,18 @@ public class MapFragment extends SupportMapFragment  {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         initialData();
-      // this.getMapAsync(googleMap ->  showCarOnMap(googleMap));
-       this.getMapAsync(this::showCarOnMap);
+
+        initMap();
 
     }
 
-//    @Override
-//    public void getMapAsync(OnMapReadyCallback onMapReadyCallback) {
-//        super.getMapAsync(onMapReadyCallback);
-//
-//        onMapReadyCallback.onMapReady();
-//
-//
-//
-//    }
+
+    private void initMap(){
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.mapView);
+        mapFragment.getMapAsync(this::showCarOnMap);
+    }
 
 
     private void initialData(){
@@ -70,12 +67,21 @@ public class MapFragment extends SupportMapFragment  {
 
 private void showCarOnMap(GoogleMap googleMap){
 
-    LatLng sydney = new LatLng(-34, 151);
-    googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+    new Picture().bitmapFromUrl2(car.getImage(), result ->{
+
+        LatLng sydney = new LatLng(59.938806, 30.314278);
+        googleMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title(car.getName())
+                .icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(result,250,250,true)))
+                .snippet(car.getPhone()));
+
+    } );
+
 
 }
 
-
+private void show(){}
 
 
 }
