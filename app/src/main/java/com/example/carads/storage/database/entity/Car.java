@@ -33,7 +33,7 @@ public class Car implements Serializable {
     private String address;
 
 
-    public Car(String name, String image, String date_issue, String mileage, String color, int price, Double valume, int power, String owner, String phone, String mail, String address) {
+    public Car(String name, String image, String date_issue, String mileage, String color, int price, Double  valume, int power, String owner, String phone, String mail, String address) {
         this.name = name;
         this.image = image;
         this.date_issue = date_issue;

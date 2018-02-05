@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingTop="@dimen/component_up_margin_large"
     android:layout_width="match_parent"
@@ -19,8 +20,21 @@
         android:layout_marginBottom="@dimen/component_up_margin_large"
         android:background="@drawable/divider" />
 
+
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:paddingTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lin_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
     <TextView
-        android:id="@+id/tvIndoReg"
+        android:id="@+id/tvInfoReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tv_register" />
@@ -32,7 +46,25 @@
         android:theme="@style/ButtonTheme"
         android:layout_marginTop="@dimen/component_up_margin"
         android:text="@string/register" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lin_zareg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvZaregistr"
+                style="@style/MyTitulTextStyle"
+                android:background="?selectableItemBackground"
+                android:layout_marginTop="@dimen/component_up_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>
 
 

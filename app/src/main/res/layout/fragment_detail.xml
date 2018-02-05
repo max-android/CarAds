@@ -41,7 +41,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextColor="@color/colorWhite"
                 app:subtitleTextColor="@color/colorWhite"
-                app:popupTheme="@style/AppTheme"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"/>
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -222,5 +222,15 @@
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/detailFAB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_favorite" />
 
 </android.support.design.widget.CoordinatorLayout>

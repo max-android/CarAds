@@ -18,11 +18,12 @@ import android.view.MenuItem;
 import android.support.design.widget.TabLayout;
 
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.RequestManager;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.ui.filter.FilterActivity;
-import com.example.carads.ui.myads.AdvertisementActivity;
+import com.example.carads.ui.myads.AddEditAdActivity;
 import com.example.carads.ui.myads.MyAdsActivity;
 import com.example.carads.ui.registration.LoginRegisterActivity;
 import com.example.carads.ui.search.FavoritesActivity;
@@ -34,6 +35,10 @@ import com.example.carads.R;
 import com.example.carads.storage.database.AppBase;
 import com.example.carads.storage.database.DatabaseManager;
 import com.example.carads.di.App;
+import com.example.carads.ui.utilities.NetInspector;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -44,7 +49,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private  List<Car> carList;
+
     private DrawerLayout drawer;
     private SearchView searchView;
     private  CompositeDisposable subscription;
@@ -57,16 +62,29 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     @Inject
     AppBase base;
 
+    @Inject
+    FirebaseAuth firebaseAuth;
+
+    private FirebaseUser currentUser;
+
+
+
+   private View headerView;
+    private  TextView  tvHeaderStatusReg;
+
+    private List<Car> carList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car);
 
-        App.getAppComponent().injectMainActivity(this);
+      //  App.getAppComponent().injectMainActivity(this);
 
         initComponents();
-
-        initData();
+       // updateNavigationHeader(currentUser);
+       // initData();
 
     }
 
@@ -89,11 +107,11 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
 
     // View view = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
-     View view =  navigationView.getHeaderView(0);
+      headerView =  navigationView.getHeaderView(0);
 
-     view.setOnClickListener(v -> launchLoginOrRegistration());
 
-     // Toast.makeText(CarActivity.this,"HeaderView",Toast.LENGTH_SHORT).show();
+
+     headerView.setOnClickListener(v -> launchLoginOrRegistration());
 
 
      SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -107,7 +125,44 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
 
      searchView.setOnQueryTextListener(queryTextListener);
 
+   //  currentUser=firebaseAuth.getCurrentUser();
  }
+
+
+    @Override
+    protected void onStart() {
+
+        App.getAppComponent().injectMainActivity(this);
+
+        currentUser=firebaseAuth.getCurrentUser();
+
+        tvHeaderStatusReg = (TextView) headerView.findViewById(R.id.tvHeaderStatusReg);
+
+        updateNavigationHeader(currentUser);
+
+        initData();
+
+        super.onStart();
+    }
+
+
+
+ private void updateNavigationHeader(FirebaseUser currentUser){
+
+if(currentUser!=null){
+
+    tvHeaderStatusReg.setText(getString(R.string.emailpassword_status_fmt,
+            currentUser.getEmail(),currentUser.isEmailVerified()));
+
+}else{
+
+    tvHeaderStatusReg.setText(getString(R.string.register));
+
+}
+
+ }
+
+
 
 private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryTextListener() {
     @Override
@@ -147,7 +202,7 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
 
 //    if(NetInspector.isOnline(this)){
 //
-      //обновление данных типо с сервера
+//    //  обновление данных типо с сервера
 //        carList=service.getCars();
 //
 //       // запись данных в бд
@@ -155,14 +210,17 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
 //                    @Override
 //                    public void run() {
 //
-//                        databaseManager.writeDataIntoBD(carList);
+//                     databaseManager.writeDataIntoBD(carList);
 //
 //                    }
 //                }).start();
 //
 //        launchDataIntoFrag(new ArrayList<Car>(carList));
-
+//
 //    }else{
+
+
+
 
         subscription.add(databaseManager.readAllDataFromBD()
 
@@ -173,7 +231,11 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,"Error",Toast.LENGTH_LONG).show()));
+                        ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
+
+
+
+
    // }
 
 }
@@ -293,6 +355,8 @@ private void navigationBackPressed(){
     }
 
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -309,20 +373,26 @@ private void navigationBackPressed(){
 
             case R.id.nav_favor:
 
-                launchFavoriteSearch();
+                launchFavorites();
 
                 break;
 
             case R.id.nav_my_ads:
 
-                launchMyAds();
+                if (currentUser != null) {
+                    launchMyAds();
+                }else{
+                     showMessage(getString(R.string.not_acces_my_ads));
+                }
 
                 break;
 
             case R.id.nav_add:
-
-                launchDoAdvertisement();
-
+                if (currentUser != null) {
+                launchAddAd();
+                }else{
+                    showMessage(getString(R.string.not_ad_my_ads));
+                }
                 break;
 
             case R.id.nav_setting:
@@ -345,10 +415,11 @@ private void navigationBackPressed(){
 
     }
 
-    private void launchDoAdvertisement(){
+    private void launchAddAd(){
 
-        Intent myAdvertisement = new Intent(this, AdvertisementActivity.class);
-        startActivity(myAdvertisement);
+        Intent myAd = new Intent(this, AddEditAdActivity.class);
+        myAd.setType(Constants.TYPE_ADD_AD);
+        startActivity(myAd);
 
     }
 
@@ -359,12 +430,19 @@ private void navigationBackPressed(){
 
     }
 
-    private void launchFavoriteSearch(){
+    private void launchFavorites(){
 
         Intent myFavoriteSearch = new Intent(this, FavoritesActivity.class);
         startActivity(myFavoriteSearch);
 
     }
+
+    private void showMessage(String message){
+
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+
+    }
+
 
     @Override
     protected void onDestroy() {

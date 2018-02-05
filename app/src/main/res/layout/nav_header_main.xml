@@ -25,13 +25,13 @@
          />
 
     <TextView
+        android:id="@+id/tvHeaderStatusReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/register"
         android:textColor="@color/colorText"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
 </LinearLayout>
 
     <!--android:src="@drawable/profile_2"-->

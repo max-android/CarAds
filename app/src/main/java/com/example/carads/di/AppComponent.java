@@ -3,7 +3,11 @@ package com.example.carads.di;
 import com.example.carads.storage.favorites.MyFavorites;
 import com.example.carads.ui.detail.DetailFragment;
 import com.example.carads.ui.detail.SaveFragment;
+import com.example.carads.ui.myads.AddEditAdActivity;
+import com.example.carads.ui.myads.MyAdsActivity;
 import com.example.carads.ui.primary.AutoFragment;
+import com.example.carads.ui.primary.PrimaryFragment;
+import com.example.carads.ui.registration.LoginRegisterActivity;
 import com.example.carads.ui.search.FavoritesActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.primary.CarActivity;
@@ -22,7 +26,8 @@ import dagger.Component;
         DatabaseModule.class,
         MyFavoritesModule.class,
         PermissionModule.class,
-        FileModule.class
+        FileModule.class,
+        FirebaseModule.class
 })
 
  public interface AppComponent {
@@ -35,6 +40,11 @@ import dagger.Component;
      void injectDetailFragment(DetailFragment detailFragment);
      void injectFavoritesActivity(FavoritesActivity favoritesActivity);
      void injectSaveFragment(SaveFragment saveFragment);
+
+     void injectPrimaryFragment(PrimaryFragment primaryFragment);
+     void injectLoginRegisterActivity(LoginRegisterActivity loginRegisterActivity);
+     void injectMyAdsActivity (MyAdsActivity myAdsActivity);
+     void injectAddEditAdActivity (AddEditAdActivity addEditAdActivity);
 
 
 }

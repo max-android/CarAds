@@ -27,6 +27,7 @@ public class App extends Application {
                 .myFavoritesModule(new MyFavoritesModule(this))
                 .permissionModule(new PermissionModule())
                         .fileModule(new FileModule(this))
+                .firebaseModule(new FirebaseModule())
                 .build();
     }
 

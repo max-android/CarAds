@@ -2,15 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_my_ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.carads.ui.myads.MyAdsActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarRegister"
+        app:subtitleTextColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/toolbar_elevation"
+        >
+    </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvMyMail"
+        style="@style/MyTitulTextStyle"
+        android:layout_marginTop="@dimen/screen_padding"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="MyAds" />
+        android:gravity="center"
+        tools:text="User" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMyAdds"
+        android:layout_marginTop="@dimen/screen_padding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tvInfoMyAds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MyTitulTextStyle"
+        android:textColor="@color/colorAccent"
+        android:padding="@dimen/container_padding"
+        android:gravity="center_vertical"
+        android:text="@string/empty_my_ads" />
+
 </LinearLayout>

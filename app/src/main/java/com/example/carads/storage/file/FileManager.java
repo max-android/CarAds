@@ -1,4 +1,4 @@
-package com.example.carads.service;
+package com.example.carads.storage.file;
 
 import android.content.Context;
 import android.graphics.Bitmap;

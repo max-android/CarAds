@@ -53,8 +53,6 @@
     <string name="favorites">Избранное</string>
 
 
-
-
     <string name="date_issue">Год выпуска</string>
     <string name="сar_mileage">Пробег автомобиля</string>
     <string name="сar_value">Объем двигателя</string>
@@ -84,6 +82,7 @@
     <string name="successful_save">Объявление сохранено</string>
 
     <string name="empty_favorites">У вас пока нет избранных объявлений</string>
+    <string name="empty_my_ads">У вас пока нет собственных объявлений</string>
 
 
     <string name="error_save">Объявление ранее сохранено</string>
@@ -93,14 +92,10 @@
     <string name="cancel">Отмена</string>
 
 
-    <string name="delete_entry">Запись удалена</string>
-
-
     <string name="dialog_image_error">Подключите интернет</string>
 
 
     <string name="not_found_ads">Избранные объявления отсутствуют</string>
-
 
 
     <string name="image_save_successful">Картинка  сохранена по пути:</string>
@@ -131,7 +126,6 @@
     <string name="key">AIzaSyCvw8LuGJ2fhBwtFLrQErnIM1H2QGH8Qvw</string>
 
 
-
     <string name="loading">загрузка</string>
 
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
@@ -152,8 +146,39 @@
     <string name="register_user">Регистрация пользователя</string>
 
 
+    <string name="not_acces_my_ads">Для пользования своими объявлениями необходимо войти или зарегистрироваться</string>
+    <string name="not_ad_my_ads">Для добавления своих объявлений необходимо войти или зарегистрироваться</string>
 
 
+    <string name="my_adds_label">Мои объявления</string>
+
+    <string name="user_not_exist_ads">У вас пока нет собственных объявлений</string>
+    <string name="error_delete_ad">Ошибка удаления объявления, попробуйте снова</string>
+    <string name="error_update_ad">Ошибка обновления объявления, попробуйте снова</string>
+    <string name="error_insert_ad">Ошибка добавления объявления, попробуйте снова</string>
+
+
+    <string name="dialog_title_my_ads">Выберите действия для вашего объявления:</string>
+    <string name="edit_my_ads">Изменить</string>
+    <string name="delete_ad">Объявление удалено</string>
+    <string name="update_ad">Объявление обновлено</string>
+    <string name="insert_ad">Объявление добавлено</string>
+
+    <string name="name_car">Марка автомобиля</string>
+    <string name="url_image">Url картинки</string>
+    <string name="car_owner">Имя владельца</string>
+    <string name="owner_phone">Номер телефона</string>
+    <string name="owner_email">Email адрес</string>
+
+
+    <string name="fill_in_the_field">Поле не заполнено</string>
+    <string name="not_filled">Заполните поля</string>
+    <string name="owner_address">Местоположение</string>
+    <string name="delete_entry">Запись удалена</string>
+
+
+    <string name="repeat_query">Попробуйте повторить запрос!</string>
+    <string name="add_edit_label">Добавление или изменение объявлений</string>
 
 
 </resources>

@@ -74,6 +74,10 @@ public class Constants {
     public static final String TYPE_SEARCH_COLOR ="serach color";
 
 
+    public static final String TYPE_ADD_AD ="add";
+    public static final String TYPE_EDIT_AD ="edit";
+
+
     public static final String NAVI_MESSAGE_BY_SEARCH ="Воспользуйтесь поском главного экрана";
 
 
@@ -100,5 +104,8 @@ public class Constants {
     public static final String FORMAT_JPG = ".jpg";
     public static final String FORMAT_TXT = ".txt";
     public static final int WRITE_FILE_PERMISSION_REQUEST_CODE = 1;
+
+
+    public static final String EDIT = "edit_ad";
 
 }

@@ -175,7 +175,7 @@ new Thread(()->{
     private void showDialog(Drawable drawable,Car car){
 
         Dialog dialog=new Dialog();
-        dialog.showDialog(this,drawable,()-> deleteEntryIntoFavorites(car),()->showDetailInfo(car));
+        dialog.showDialog(this,drawable,()-> deleteEntryIntoFavorites(car),()->showDetailInfo(car),R.string.select_ad,R.string.question,R.string.detail);
 
     }
 

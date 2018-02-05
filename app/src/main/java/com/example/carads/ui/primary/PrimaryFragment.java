@@ -9,14 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.carads.R;
+import com.example.carads.di.App;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.ui.registration.LoginRegisterActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.utilities.Constants;
+import com.example.carads.ui.utilities.ProgressManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 
 /**
@@ -27,6 +34,15 @@ public class PrimaryFragment extends Fragment {
 
 
     private   ArrayList<Car> cars;
+
+    private ProgressManager dialogProgress;
+
+    private FirebaseUser currentUser;
+
+    private TextView  tvZaregistr;
+
+    @Inject
+    FirebaseAuth mAuth;
 
     public PrimaryFragment() {
     }
@@ -46,6 +62,8 @@ public class PrimaryFragment extends Fragment {
 
         initComponent(view);
 
+        updateUI(view,currentUser);
+
         setAllDataFromDB();
 
     }
@@ -53,12 +71,51 @@ public class PrimaryFragment extends Fragment {
 
     private void initComponent(View view){
 
+        App.getAppComponent().injectPrimaryFragment(this);
+        currentUser = mAuth.getCurrentUser();
+
+
         Button showAds = (Button)view.findViewById(R.id.showAdsBtn);
         Button registr = (Button)view.findViewById(R.id.registrBtn);
+        tvZaregistr = (TextView)view.findViewById(R.id.tvZaregistr);
 
-        showAds.setOnClickListener(v ->showAds());
-        registr.setOnClickListener(view1 -> launchLoginOrRegistration());
+
+        dialogProgress = new ProgressManager(getContext());
+
+        showAds.setOnClickListener(this::setListener);
+        registr.setOnClickListener(this::setListener);
+        tvZaregistr.setOnClickListener(this::setListener);
+
+
     }
+
+
+
+    private void setListener(View v){
+
+
+        switch (v.getId()) {
+
+            case R.id.showAdsBtn:
+
+                showAds();
+
+                break;
+            case R.id.registrBtn:
+
+                launchLoginOrRegistration();
+
+                break;
+            case R.id.tvZaregistr:
+
+                launchLoginOrRegistration();
+
+                break;
+    }
+
+
+    }
+
 
 
     private void setAllDataFromDB(){
@@ -82,6 +139,28 @@ public class PrimaryFragment extends Fragment {
         showAllAdsIntent.putExtra(Constants.KEY_TOTAL_CARS,cars);
         showAllAdsIntent.setType(Constants.TYPE_PRIMARY);
            startActivity(showAllAdsIntent);
+    }
+
+
+
+
+
+    private void updateUI(View view,FirebaseUser currentUser) {
+
+      //  dialogProgress.hideProgressDialog();
+
+        if(currentUser!=null){
+
+            view.findViewById(R.id.lin_info).setVisibility(View.GONE);
+            view.findViewById(R.id.lin_zareg).setVisibility(View.VISIBLE);
+            tvZaregistr.setText(getString(R.string.emailpassword_status_fmt,
+                    currentUser.getEmail(), currentUser.isEmailVerified()));
+
+        }else{
+            view.findViewById(R.id.lin_info).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.lin_zareg).setVisibility(View.GONE);
+
+        }
     }
 
 

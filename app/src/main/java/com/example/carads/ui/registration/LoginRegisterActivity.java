@@ -12,21 +12,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.carads.R;
+import com.example.carads.di.App;
 import com.example.carads.ui.utilities.ProgressManager;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import javax.inject.Inject;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
     private TextView tvStatus;
     private EditText email;
     private EditText password;
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private ProgressManager dialogProgress;
+
+    @Inject
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -35,27 +39,27 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
 
         initComponents();
-        initFirebase();
+       // initFirebase();
 
     }
 
-    private void initFirebase(){
-
-        mAuth = FirebaseAuth.getInstance();
-    }
+//    private void initFirebase(){
+//
+//        mAuth = FirebaseAuth.getInstance();
+//    }
 
     private void initComponents() {
+
+        App.getAppComponent().injectLoginRegisterActivity(this);
 
         tvStatus=(TextView)findViewById(R.id.tvStatus);
         email=((TextInputLayout)findViewById(R.id.email_input)).getEditText();
         password=((TextInputLayout)findViewById(R.id.password_input)).getEditText();
 
-
         Button btnSign =(Button)findViewById(R.id.sign_in_button);
         Button btnRegister =(Button)findViewById(R.id.register_button);
         Button btnSignOut =(Button)findViewById(R.id.sign_out_button);
         Button btnVerifyEmail =(Button)findViewById(R.id.verify_email_button);
-
 
 
         btnSign.setOnClickListener(this::setListener);
@@ -68,7 +72,6 @@ public class LoginRegisterActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(" ");
         toolbar.setTitle(R.string.register_user);
         toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
-
 
         dialogProgress = new ProgressManager(this);
     }
@@ -89,9 +92,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
             case R.id.verify_email_button:
                 sendEmailVerification();
                 break;
-
         }
-
     }
 
 

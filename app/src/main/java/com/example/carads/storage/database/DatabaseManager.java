@@ -4,6 +4,7 @@ import com.example.carads.storage.database.entity.Car;
 
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Single;
 
@@ -22,41 +23,21 @@ public class DatabaseManager {
     }
 
 
-    public void writeDataIntoBD(List<Car> list) {
-
-        base.getCarDao().insertCars(list);
-
-    }
-
-
-    public void updateBD(List<Car> list) {
-
-        base.getCarDao().updateCars(list);
-
-    }
-
-
-//    public Single<List<Car>> getStatus(){
+//    public void writeDataIntoBD(List<Car> list) {
 //
-//
-//      return  base.getCarDao().getAllCarsDB();
+//        base.getCarDao().insertCars(list);
 //
 //
 //    }
+
+    public void writeDataIntoBD(List<Car> list) {
+
+     base.getCarDao().insertCars(list);
+    }
 
 
     public Single<List<Car>> readAllDataFromBD() {
 
-//        Single<List<Film>> list=null;
-//
-//       if(base.getFilmDao().getAllFilmsDB().blockingGet()!=null){
-//
-//         list = base.getFilmDao().getAllFilmsDB();
-//
-//       }
-//
-//        return list;
-//    }
 
         Single<List<Car>> list = base.getCarDao().getAllCarsDB();
 
@@ -64,24 +45,6 @@ public class DatabaseManager {
 
     }
 
-//    public  boolean statusBD(){
-//
-//
-//        boolean status=false;
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                if ()
-//
-//
-//            }
-//        }).start();
-//
-//
-//
-//    }
 
     public Single<List<Car>>readMarkaFromBD(String marka) {
 
@@ -135,6 +98,44 @@ public class DatabaseManager {
         return car;
     }
 
+
+    public Single<List<Car>> readMyAdFromBD(String email){
+
+        Single<List<Car>>  cars =  base.getCarDao().getCarMyAddFromDB(email);
+
+        return cars;
+    }
+
+
+//    public int deleteCarFromBD(String email){
+//
+//        //Single<Integer>  car =  base.getCarDao().deleteCarByParameter(email);
+//
+//        return base.getCarDao().deleteCarByParameter(email);
+//    }
+
+
+    public int deleteCarFromBD(Car car){
+
+        int  delete =  base.getCarDao().deleteCar(car);
+
+        return delete;
+    }
+
+
+    public void  updateCarFromBD(int id,String name, String image, String date_issue, String mileage, String color, int price, double  valume, int power, String owner, String phone, String mail, String address){
+
+       base.getCarDao().updateCarDB(id,name,image,date_issue,mileage,color,price,valume,power,owner,phone,mail,address);
+
+
+    }
+
+
+    public void  insertCarIntoBD(Car car){
+
+    base.getCarDao().insertCar(car);
+
+    }
 
 
 }
