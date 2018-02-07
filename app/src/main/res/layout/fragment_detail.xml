@@ -231,6 +231,6 @@
         android:clickable="true"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@drawable/ic_favorite" />
+        android:src="@drawable/ic_favorite" />
 
 </android.support.design.widget.CoordinatorLayout>

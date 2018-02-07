@@ -24,4 +24,6 @@
     <dimen name="detail_description_start">225dp</dimen>
     <dimen name="text_snack">6sp</dimen>
 
+    <dimen name="text_view_padding">16sp</dimen>
+
 </resources>

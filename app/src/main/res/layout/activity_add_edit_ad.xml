@@ -273,7 +273,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/owner_address"
                     android:theme="@style/MyEditText"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
                     android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>

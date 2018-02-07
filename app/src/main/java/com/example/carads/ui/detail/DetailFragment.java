@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -89,6 +90,7 @@ public class DetailFragment extends Fragment {
 
         App.getAppComponent().injectDetailFragment(this);
 
+
         Toolbar toolbar = (Toolbar)view.findViewById(R.id.tbDetail);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -123,6 +125,9 @@ public class DetailFragment extends Fragment {
         tvСarColor.setText(car.getColor());
         tvСarPrice.setText(String.valueOf(car.getPrice())+" "+getString(R.string.rubles));
 
+        FloatingActionButton detailFAB=(FloatingActionButton)view.findViewById(R.id.detailFAB);
+
+        detailFAB.setOnClickListener(view1 -> saveAdIntoFavorites());
 
         Button btnCall=(Button)view.findViewById(R.id.btnCall);
         Button btnWrite=(Button)view.findViewById(R.id.btnWrite);
@@ -163,7 +168,7 @@ public class DetailFragment extends Fragment {
 
     private void showMessage(){
 
-        Toast.makeText(getContext(),getString(R.string.message),Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),getString(R.string.check_connection),Toast.LENGTH_LONG).show();
 
     }
 
@@ -173,7 +178,7 @@ public class DetailFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
        // ((DetailActivity)getActivity()).getMenuInflater().inflate(R.menu.menu_share,menu);
-        inflater.inflate(R.menu.menu_share,menu);
+      inflater.inflate(R.menu.menu_share,menu);
 
     }
 
@@ -182,9 +187,9 @@ public class DetailFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
 
-            case R.id.favorite:
-                saveAdIntoFavorites();
-                break;
+//            case R.id.favorite:
+//                saveAdIntoFavorites();
+//                break;
 
             case R.id.share:
                 share();

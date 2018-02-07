@@ -36,7 +36,8 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 
         View view=inflater.inflate(R.layout.avto_item,parent,false);
 
-        return  new ViewHolder(view,listener);
+       // return  new ViewHolder(view,listener);
+        return  new ViewHolder(view);
     }
 
     @Override
@@ -66,7 +67,8 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 
         private Car car;
 
-        public ViewHolder(View itemView, final CarClickListener listener) {
+       // public ViewHolder(View itemView,final CarClickListener listener) {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             imageView=(ImageView)itemView.findViewById(R.id.imageAvto);
@@ -76,12 +78,11 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
             tvMileage=(TextView)itemView.findViewById(R.id.tvMileage);
 
 
-
-                itemView.setOnClickListener(this::launchFilm);
+                itemView.setOnClickListener(this::launchCar);
         }
 
 
-        private void launchFilm(View view){
+        private void launchCar(View view){
 
             listener.onCarClick(car);
 

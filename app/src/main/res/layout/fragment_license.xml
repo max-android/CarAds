@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/colorScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_frag_license"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MyTitulTextStyle"
+        android:gravity="center"
+        android:text="@string/text_license" />
+</LinearLayout>

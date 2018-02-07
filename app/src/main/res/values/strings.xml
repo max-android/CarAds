@@ -52,6 +52,8 @@
     <string name="my_ads">Мои объявления</string>
     <string name="favorites">Избранное</string>
 
+    <string name="empty_body"> </string>
+
 
     <string name="date_issue">Год выпуска</string>
     <string name="сar_mileage">Пробег автомобиля</string>
@@ -69,7 +71,7 @@
     <string name="year">г</string>
 
 
-    <string name="message">Попробуйте проверить связь!!!</string>
+    <string name="check_connection">Попробуйте проверить связь!!!</string>
     <string name="detail">Детали</string>
     <string name="favorite">Избранное</string>
     <string name="map">На карте</string>
@@ -179,6 +181,15 @@
 
     <string name="repeat_query">Попробуйте повторить запрос!</string>
     <string name="add_edit_label">Добавление или изменение объявлений</string>
+
+    <string name="help">Помощь</string>
+    <string name="app_info">Информация о приложении</string>
+    <string name="license">Лиценция</string>
+    <string name="config">Политика конфиденциальности</string>
+    <string name="ask_a_question_or_report_an_error">Задайте вопрос или сообщите об ошибке</string>
+    <string name="ask_a_question_theme">Задайте тему сообщения</string>
+
+    <string name="text_license">Лицензионное соглашение</string>
 
 
 </resources>

@@ -108,4 +108,18 @@ public class Constants {
 
     public static final String EDIT = "edit_ad";
 
+
+
+    public static final String DET_SETTINGS = "det_set";
+
+    public static final String HELP = "help_settings";
+    public static final String INFO_APP = "info_app_settings";
+    public static final String LICEN = "licen_settings";
+    public static final String CONF = "config_settings";
+
+
+    public static final String OFFICIAL_MAIL= "servicecarads_officialmail@mail";
+
+
+
 }
