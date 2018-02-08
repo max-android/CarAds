@@ -192,4 +192,10 @@
     <string name="text_license">Лицензионное соглашение</string>
 
 
+    <string name="no_network_try_again">Нет интернета - попробуйте еще раз</string>
+
+
+    <string name="snack_no_network">Интернет отсутствует</string>
+
+
 </resources>

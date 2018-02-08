@@ -1,4 +1,4 @@
-package com.example.carads.ui.setting;
+package com.example.carads.ui.intro;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,26 +11,23 @@ import android.view.ViewGroup;
 import com.example.carads.R;
 
 /**
- * Created by Максим on 06.02.2018.
+ * Created by Максим on 08.02.2018.
  */
 
-public class ConfidentialityFragment extends Fragment {
+public class SplashFragment extends Fragment {
 
-
-    public ConfidentialityFragment() {
+    public SplashFragment() {
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_confidentiality,container,false);
+        return inflater.inflate(R.layout.fragment_splash,container,false);
     }
 
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
 
-    }
+
 }

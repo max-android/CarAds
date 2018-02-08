@@ -16,7 +16,8 @@ import com.example.carads.R;
 
 public class LicenseFragment extends Fragment {
 
-
+    public LicenseFragment() {
+    }
 
     @Nullable
     @Override

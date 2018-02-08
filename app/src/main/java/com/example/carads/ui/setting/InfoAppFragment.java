@@ -16,6 +16,8 @@ import com.example.carads.R;
 
 public class InfoAppFragment extends Fragment {
 
+    public InfoAppFragment() {
+    }
 
     @Nullable
     @Override

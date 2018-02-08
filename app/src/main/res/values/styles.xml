@@ -49,6 +49,7 @@
 
     </style>
 
+
     <style name="MyCardViewStyle" parent="Theme.AppCompat">
 
         <item name="cardCornerRadius">@dimen/card_radius</item>

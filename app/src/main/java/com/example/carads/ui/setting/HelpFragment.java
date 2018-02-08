@@ -31,6 +31,8 @@ public class HelpFragment extends Fragment {
     private Button btnAskQuest;
     private Notification notification;
 
+    public HelpFragment() {
+    }
 
     @Nullable
     @Override

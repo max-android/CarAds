@@ -19,6 +19,7 @@ import com.example.carads.storage.database.AppBase;
 import com.example.carads.storage.database.DatabaseManager;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
+import com.example.carads.ui.utilities.NetInspector;
 import com.example.carads.ui.utilities.Notification;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -179,7 +180,10 @@ private void saveData(){
     if(validateForm()){
 
         if(edit){updateDataBase();}else{
-            insertAdIntoDataBase();}
+
+         if(NetInspector.isOnline(this)){ insertAdIntoDataBase();}
+            else{showMessage(R.string.snack_no_network);  }
+           }
 
     }else{
         showMessage(R.string.not_filled);

@@ -17,15 +17,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key" />
-
-        <activity
-            android:name=".ui.primary.CarActivity"
-            android:label="">
+        <activity android:name=".ui.intro.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.primary.CarActivity"
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".ui.detail.DetailActivity"
@@ -47,7 +48,9 @@
                 android:value="com.example.carads.ui.primary.CarActivity" />
         </activity>
         <activity android:name=".ui.search.FavoritesActivity" />
-        <activity android:name=".ui.setting.DetailSettingsActivity"></activity>
+        <activity android:name=".ui.setting.DetailSettingsActivity" />
+
+
     </application>
 
 </manifest> <!-- android:label="@string/app_name" -->
