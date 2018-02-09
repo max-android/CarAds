@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/screen_padding"
+
     android:orientation="vertical"
     tools:context="com.example.carads.ui.filter.FilterActivity">
 
@@ -22,12 +22,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/component_up_margin"
+        android:layout_marginStart="16sp"
         android:text="@string/sort" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="vertical"
         >
 
@@ -76,8 +78,10 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/MyButton"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/component_vertical_margin"
+        android:layout_margin="8dp"
         android:text="@string/show_ads" />
 </LinearLayout>

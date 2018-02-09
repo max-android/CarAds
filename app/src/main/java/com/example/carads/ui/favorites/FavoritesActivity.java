@@ -1,4 +1,4 @@
-package com.example.carads.ui.search;
+package com.example.carads.ui.favorites;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -19,6 +19,7 @@ import com.example.carads.storage.database.DatabaseManager;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.storage.favorites.MyFavorites;
 import com.example.carads.ui.detail.DetailActivity;
+import com.example.carads.ui.search.AvtoAdapter;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Dialog;
 import com.example.carads.ui.utilities.Notification;

@@ -26,7 +26,7 @@ import com.example.carads.ui.filter.FilterActivity;
 import com.example.carads.ui.myads.AddEditAdActivity;
 import com.example.carads.ui.myads.MyAdsActivity;
 import com.example.carads.ui.registration.LoginRegisterActivity;
-import com.example.carads.ui.search.FavoritesActivity;
+import com.example.carads.ui.favorites.FavoritesActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.setting.SettingsActivity;
 import com.example.carads.ui.utilities.Constants;
@@ -35,7 +35,6 @@ import com.example.carads.R;
 import com.example.carads.storage.database.AppBase;
 import com.example.carads.storage.database.DatabaseManager;
 import com.example.carads.di.App;
-import com.example.carads.ui.utilities.NetInspector;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -49,10 +48,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private DrawerLayout drawer;
-    private SearchView searchView;
-    private  CompositeDisposable subscription;
     @Inject
     CarsService service;
 
@@ -66,11 +61,11 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     FirebaseAuth firebaseAuth;
 
     private FirebaseUser currentUser;
-
-
-
    private View headerView;
     private  TextView  tvHeaderStatusReg;
+    private DrawerLayout drawer;
+    private SearchView searchView;
+    private  CompositeDisposable subscription;
 
     private List<Car> carList;
 
@@ -80,15 +75,24 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car);
 
-      //  App.getAppComponent().injectMainActivity(this);
-
-        initComponents();
-       // updateNavigationHeader(currentUser);
-       // initData();
+        initComponentsOnCreate();
 
     }
 
- private void initComponents(){
+    @Override
+    protected void onStart() {
+
+        initComponentsOnStart();
+
+        updateNavigationHeader(currentUser);
+
+        initData();
+
+        super.onStart();
+    }
+
+
+ private void initComponentsOnCreate(){
 
      Toolbar toolbar=(Toolbar)findViewById(R.id.mainToolBar);
      setSupportActionBar(toolbar);
@@ -105,11 +109,7 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
      NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
      navigationView.setNavigationItemSelectedListener(this);
 
-    // View view = navigationView.inflateHeaderView(R.layout.nav_header_main);
-
       headerView =  navigationView.getHeaderView(0);
-
-
 
      headerView.setOnClickListener(v -> launchLoginOrRegistration());
 
@@ -129,21 +129,23 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
  }
 
 
-    @Override
-    protected void onStart() {
-
+    private void initComponentsOnStart(){
         App.getAppComponent().injectMainActivity(this);
 
         currentUser=firebaseAuth.getCurrentUser();
 
         tvHeaderStatusReg = (TextView) headerView.findViewById(R.id.tvHeaderStatusReg);
 
-        updateNavigationHeader(currentUser);
 
-        initData();
 
-        super.onStart();
+
     }
+
+
+
+
+
+
 
 
 
@@ -225,7 +227,7 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
         subscription.add(databaseManager.readAllDataFromBD()
 
                 //.doOnSuccess(list ->Collections.shuffle(list))
-                .doOnSuccess(list ->showLog(list))
+                //.doOnSuccess(list ->showLog(list))
                 .subscribeOn(Schedulers.io())
 
                 .observeOn(AndroidSchedulers.mainThread())
@@ -251,11 +253,6 @@ private void launchLoginOrRegistration(){
     navigationBackPressed();
 }
 
-
-    private void showLog(List<Car> list){
-
-
-}
 
 
     private void launchDataIntoFrag(ArrayList<Car> cars) {

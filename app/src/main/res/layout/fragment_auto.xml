@@ -22,13 +22,15 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/infiniti" />
+                android:text="@string/audi"
+                android:src="@drawable/audi" />
 
             <ImageButton
                 android:id="@+id/imageBmw"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:text="@string/bmw"
                 android:src="@drawable/bmw"
                 />
 
@@ -37,24 +39,26 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/porche"
-                />
+                android:text="@string/mers"
+                android:src="@drawable/mercedes" />
 
             <ImageButton
                 android:id="@+id/imagePorc"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/mercedes"  />
+                android:text="@string/porche"
+                android:src="@drawable/porche"
+                />
             <ImageButton
                 android:id="@+id/imageInf"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/audi"
+                android:text="@string/infinity"
+                android:src="@drawable/infiniti"
                 />
         </LinearLayout>
-
 
     </HorizontalScrollView>
 

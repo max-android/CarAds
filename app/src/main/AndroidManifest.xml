@@ -47,7 +47,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.carads.ui.primary.CarActivity" />
         </activity>
-        <activity android:name=".ui.search.FavoritesActivity" />
+        <activity android:name=".ui.favorites.FavoritesActivity" />
         <activity android:name=".ui.setting.DetailSettingsActivity" />
 
 

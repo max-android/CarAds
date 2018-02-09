@@ -12,7 +12,10 @@ public class Constants {
 
     public static final String KEY_PRIM_FR ="primary";
     public static final String KEY_AUTO_FR ="auto";
+    public static final String KEY_AUTO_FR_POPULAR ="auto_popular";
     public static final String KEY_TOTAL_CARS ="showAllAds";
+
+    public static final String KEY_RANDOM ="random_car";
 
     public static final String KEY_SEARCH_ACT ="zapasnoy_layout";
 
@@ -66,6 +69,11 @@ public class Constants {
 
     public static final String TYPE_PRIMARY ="primary";
     public static final String TYPE_PRIMARY_SEARCH ="primary search";
+    public static final String TYPE_POPULAR_MARKA ="popular marka";
+    public static final String TYPE_RANDOM ="random";
+
+
+
     public static final String TYPE_SEARCH_VALUE ="serach value";
     public static final String TYPE_SEARCH_POWER ="serach power";
     public static final String TYPE_SEARCH_PRICE ="serach price";

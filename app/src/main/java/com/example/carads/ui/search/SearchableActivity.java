@@ -117,6 +117,10 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
             case Constants.TYPE_SEARCH_POWER:
             launchSelectAutoByPower();
                 break;
+
+            case Constants.TYPE_POPULAR_MARKA:
+                launchPopularBrands();
+                break;
                 default:
                     showMessage();
                     break;
@@ -160,7 +164,6 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
         showDataFor(totalList);
 
-
     }
 
     private void launchCarsFromSearch(){
@@ -190,6 +193,19 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
         doMySearchByMarka(marka);
     }
+
+
+    private void launchPopularBrands(){
+
+        Intent intent = getIntent();
+
+        String marka=intent.getStringExtra(Constants.KEY_AUTO_FR_POPULAR);
+
+        doMySearchByMarka(marka);
+
+    }
+
+
 
     private void launchSelectAutoByDate(){
 

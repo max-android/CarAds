@@ -1,6 +1,5 @@
 package com.example.carads.di;
 
-import com.example.carads.storage.favorites.MyFavorites;
 import com.example.carads.ui.detail.DetailFragment;
 import com.example.carads.ui.detail.SaveFragment;
 import com.example.carads.ui.myads.AddEditAdActivity;
@@ -8,10 +7,9 @@ import com.example.carads.ui.myads.MyAdsActivity;
 import com.example.carads.ui.primary.AutoFragment;
 import com.example.carads.ui.primary.PrimaryFragment;
 import com.example.carads.ui.registration.LoginRegisterActivity;
-import com.example.carads.ui.search.FavoritesActivity;
+import com.example.carads.ui.favorites.FavoritesActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.primary.CarActivity;
-import com.example.carads.ui.detail.DetailActivity;
 
 
 import javax.inject.Singleton;

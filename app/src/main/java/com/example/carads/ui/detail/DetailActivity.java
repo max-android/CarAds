@@ -14,6 +14,7 @@ import com.example.carads.R;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
 
+import java.util.Collections;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -49,6 +50,11 @@ public class DetailActivity extends AppCompatActivity {
                     launchAdFromFavorites();
                     break;
 
+                case Constants.TYPE_RANDOM:
+                    launchAdFromAutoFrag();
+                    break;
+
+
                 default:
                     showMessage();
                     break;
@@ -64,6 +70,14 @@ private void launchAdFromSearch(){
 private void launchAdFromFavorites(){
     car = (Car) getIntent().getSerializableExtra(Constants.FAVOR);
 }
+
+
+    private void launchAdFromAutoFrag(){
+
+        car = (Car) getIntent().getSerializableExtra(Constants.KEY_RANDOM);
+
+    }
+
 
     private void showMessage() {
 

@@ -35,8 +35,6 @@ public class PrimaryFragment extends Fragment {
 
     private   ArrayList<Car> cars;
 
-    private ProgressManager dialogProgress;
-
     private FirebaseUser currentUser;
 
     private TextView  tvZaregistr;
@@ -68,7 +66,6 @@ public class PrimaryFragment extends Fragment {
 
     }
 
-
     private void initComponent(View view){
 
         App.getAppComponent().injectPrimaryFragment(this);
@@ -80,19 +77,14 @@ public class PrimaryFragment extends Fragment {
         tvZaregistr = (TextView)view.findViewById(R.id.tvZaregistr);
 
 
-        dialogProgress = new ProgressManager(getContext());
-
         showAds.setOnClickListener(this::setListener);
         registr.setOnClickListener(this::setListener);
         tvZaregistr.setOnClickListener(this::setListener);
-
-
     }
 
 
 
     private void setListener(View v){
-
 
         switch (v.getId()) {
 
@@ -112,10 +104,7 @@ public class PrimaryFragment extends Fragment {
 
                 break;
     }
-
-
     }
-
 
 
     private void setAllDataFromDB(){
@@ -146,8 +135,6 @@ public class PrimaryFragment extends Fragment {
 
 
     private void updateUI(View view,FirebaseUser currentUser) {
-
-      //  dialogProgress.hideProgressDialog();
 
         if(currentUser!=null){
 

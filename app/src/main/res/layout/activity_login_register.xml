@@ -95,7 +95,7 @@ tools:context="com.example.carads.ui.registration.LoginRegisterActivity">
                     android:id="@+id/sign_in_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     style="@style/MyButton"
                     android:text="@string/action_sign_in" />
 
@@ -121,7 +121,7 @@ tools:context="com.example.carads.ui.registration.LoginRegisterActivity">
                     android:id="@+id/sign_out_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/sign_out"
                     style="@style/MyButton"
                     />
