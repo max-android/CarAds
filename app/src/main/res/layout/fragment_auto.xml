@@ -22,6 +22,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/audi"
                 android:src="@drawable/audi" />
 
@@ -30,6 +31,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/bmw"
                 android:src="@drawable/bmw"
                 />
@@ -39,6 +41,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/mers"
                 android:src="@drawable/mercedes" />
 
@@ -47,6 +50,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/porche"
                 android:src="@drawable/porche"
                 />
@@ -55,6 +59,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/infinity"
                 android:src="@drawable/infiniti"
                 />

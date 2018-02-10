@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.carads.R;
 import com.example.carads.storage.database.entity.Car;
@@ -69,19 +70,30 @@ private void showCarOnMap(GoogleMap googleMap){
 
     new Picture().bitmapFromUrl2(car.getImage(), result ->{
 
-        LatLng sydney = new LatLng(59.938806, 30.314278);
-        googleMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title(car.getName())
-                .icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(result,250,250,true)))
-                .snippet(car.getPhone()));
+
+
+        if(car.getLatitude()==0.0){ showMessage();}else{
+
+            LatLng sydney = new LatLng(car.getLatitude(), car.getLongitude());
+            googleMap.addMarker(new MarkerOptions()
+                    .position(sydney)
+                    .title(car.getName())
+                    .icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(result,250,250,true)))
+                    .snippet(car.getPhone()));
+
+        }
 
     } );
 
 
 }
 
-private void show(){}
+private void showMessage(){
+
+    Toast.makeText(getContext(),R.string.no_coord,Toast.LENGTH_LONG).show();
+
+
+}
 
 
 }

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,8 +41,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -68,7 +72,7 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     private  CompositeDisposable subscription;
 
     private List<Car> carList;
-
+    private  DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,9 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
 
         updateNavigationHeader(currentUser);
 
-        initData();
+        checkAvailabilityDB();
+
+       // initData();
 
         super.onStart();
     }
@@ -136,7 +142,9 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
 
         tvHeaderStatusReg = (TextView) headerView.findViewById(R.id.tvHeaderStatusReg);
 
+         databaseManager = new DatabaseManager(base);
 
+        subscription = new CompositeDisposable();
 
 
     }
@@ -194,53 +202,74 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
 };
 
 
-    private  void initData(){
 
-    //Flowable.fromIterable(service.getCars());
+ private void checkAvailabilityDB(){
 
-    DatabaseManager databaseManager = new DatabaseManager(base);
+     Executors.newSingleThreadExecutor().execute(()-> {
 
-     subscription = new CompositeDisposable();
+        if(base.getCarDao().getAllCarsForSize().isEmpty()){
 
-//    if(NetInspector.isOnline(this)){
+                runOnUiThread(this::insertDataIntoDB );
+
+        }else{
+                runOnUiThread(this::initDataFromDB);
+        }
+     });
+ }
+
+
+ private void initDataFromDB(){
+     subscription.add(databaseManager.readAllDataFromBD()
+             //.doOnSuccess(list ->Collections.shuffle(list))
+             //.doOnSuccess(list ->showLog(list))
+             .subscribeOn(Schedulers.io())
+
+             .observeOn(AndroidSchedulers.mainThread())
+
+             .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
+                     ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
+ }
+
+
+ private void insertDataIntoDB(){
+
+     carList = service.getCars();
+
+     Completable.fromCallable(
+             ()->{
+                 databaseManager.writeDataIntoBD(carList);
+
+                 return null;
+             }
+
+     ).subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(()-> Log.d("successfully",getString(R.string.data_successfully)),
+                     (error)-> Log.d("error_insert",getString(R.string.data_insert_error_db)));
+
+     launchDataIntoFrag(new ArrayList<Car>(carList));
+
+ }
+
+
+//    private  void initData(){
 //
-//    //  обновление данных типо с сервера
-//        carList=service.getCars();
+//        DatabaseManager databaseManager = new DatabaseManager(base);
 //
-//       // запись данных в бд
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
+//        subscription = new CompositeDisposable();
 //
-//                     databaseManager.writeDataIntoBD(carList);
+//        subscription.add(databaseManager.readAllDataFromBD()
 //
-//                    }
-//                }).start();
+//                .subscribeOn(Schedulers.io())
 //
-//        launchDataIntoFrag(new ArrayList<Car>(carList));
+//                .observeOn(AndroidSchedulers.mainThread())
 //
-//    }else{
-
-
-
-
-        subscription.add(databaseManager.readAllDataFromBD()
-
-                //.doOnSuccess(list ->Collections.shuffle(list))
-                //.doOnSuccess(list ->showLog(list))
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
-
-
-
-
-   // }
-
-}
+//                .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
+//                        ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
+//
+//
+//
+//}
 
 
 

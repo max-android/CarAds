@@ -1,5 +1,6 @@
 package com.example.carads.di;
 
+import com.example.carads.ui.utilities.LocationPermission;
 import com.example.carads.ui.utilities.WritePermission;
 
 import javax.inject.Singleton;
@@ -26,6 +27,18 @@ public class PermissionModule {
 
         return writePermission;
     }
+
+    @Provides
+    @Singleton
+    public LocationPermission provideLocationPermission(){
+
+        LocationPermission locationPermission = new LocationPermission();
+
+        return locationPermission;
+    }
+
+
+
 
 
 }

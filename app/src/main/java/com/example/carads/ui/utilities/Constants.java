@@ -112,6 +112,7 @@ public class Constants {
     public static final String FORMAT_JPG = ".jpg";
     public static final String FORMAT_TXT = ".txt";
     public static final int WRITE_FILE_PERMISSION_REQUEST_CODE = 1;
+    public static final int LOCATION_PERMISSION_REQUEST_CODE = 3;
 
 
     public static final String EDIT = "edit_ad";

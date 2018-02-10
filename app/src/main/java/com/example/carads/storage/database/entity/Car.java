@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 
 
-//@Entity(tableName = "car")
+
 @Entity(tableName = "car")
 public class Car implements Serializable {
 
@@ -25,15 +25,17 @@ public class Car implements Serializable {
     private String mileage;
     private String color;
     private int price;
-    private Double valume;
+    private double valume;
     private int power;
     private String owner;
     private String phone;
     private String mail;
     private String address;
+    private double latitude;
+    private double longitude;
 
 
-    public Car(String name, String image, String date_issue, String mileage, String color, int price, Double  valume, int power, String owner, String phone, String mail, String address) {
+    public Car(String name, String image, String date_issue, String mileage, String color, int price, double  valume, int power, String owner, String phone, String mail, String address,double latitude,double longitude) {
         this.name = name;
         this.image = image;
         this.date_issue = date_issue;
@@ -46,6 +48,8 @@ public class Car implements Serializable {
         this.phone = phone;
         this.mail = mail;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
@@ -77,7 +81,7 @@ public class Car implements Serializable {
         return price;
     }
 
-    public Double getValume() {
+    public double getValume() {
         return valume;
     }
 
@@ -101,6 +105,13 @@ public class Car implements Serializable {
         return address;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -130,7 +141,7 @@ public class Car implements Serializable {
         this.price = price;
     }
 
-    public void setValume(Double valume) {
+    public void setValume(double valume) {
         this.valume = valume;
     }
 
@@ -152,5 +163,13 @@ public class Car implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -122,7 +122,7 @@ public class SaveFragment extends Fragment {
                 if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     //срабатывает только один раз при получении разрешения,потом вызывается внутри saveImage()
-                    notification.showMessage(getString(R.string.permission_granted));
+                    notification.showMessage(getString(R.string.permission_write_granted));
 
                   //  savePictures();
 
@@ -142,7 +142,7 @@ public class SaveFragment extends Fragment {
                     //в данном случае пользователь постоянно будет получать такое сообщение и будет пользоваться приложением
                     //с ограниченными возможностями (без записи) или польхователь сам может найти настройки для доступа
                     //к хранилищу  для приложения
-                    notification.showMessage(getString(R.string.permission_denied));
+                    notification.showMessage(getString(R.string.permission_write_denied));
 
                 }
                 break;

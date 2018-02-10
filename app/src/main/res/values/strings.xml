@@ -106,7 +106,8 @@
     <string name="save_error_data">Данные не сохранены</string>
 
 
-    <string name="permission_explanation">Для сохранения картинок приложению требуется доступ к файловой системе</string>
+    <string name="permission_file_sistem_explanation">Для сохранения картинок приложению требуется доступ к файловой системе</string>
+    <string name="permission_location_explanation">Для создания собственного объявления приложению требуется доступ к определению местоположения</string>
 
     <string name="save_in_pictures">Картинка  сохранена в папке Pictures</string>
     <string name="save_into_Pictures">Сохранить в Pictures</string>
@@ -117,8 +118,11 @@
     <string name="data_saved_internal">Объявление сохранено в приложении по пути:</string>
 
 
-    <string name="permission_granted">Разрешение на чтение и запись файлов было предоставлено</string>
-    <string name="permission_denied">Чтение и запись файлов запрещена</string>
+    <string name="permission_write_granted">Разрешение на чтение и запись файлов было предоставлено</string>
+    <string name="permission_location_granted">Разрешение на местоположение было предоставлено</string>
+    <string name="permission_write_denied">Чтение и запись файлов запрещена</string>
+
+    <string name="permission_location_denied">Определение местоположения запрещено</string>
 
     <string name="message_setting">Получение доступа к хранилищу</string>
 
@@ -159,6 +163,9 @@
     <string name="error_update_ad">Ошибка обновления объявления, попробуйте снова</string>
     <string name="error_insert_ad">Ошибка добавления объявления, попробуйте снова</string>
 
+    <string name="data_successfully">Данные успешно записаны в бд</string>
+    <string name="data_insert_error_db">Ошибка записи в бд</string>
+
 
     <string name="dialog_title_my_ads">Выберите действия для вашего объявления:</string>
     <string name="edit_my_ads">Изменить</string>
@@ -196,6 +203,17 @@
 
 
     <string name="snack_no_network">Интернет отсутствует</string>
+
+    <string name="latitude">Широта:</string>
+
+    <string name="longitude">Долгота:</string>
+    <string name="turn_on_location">Включите геолокацию и перезагрузитесь</string>
+
+
+    <string name="explanation_location_ad">Ваше объявление будет показано на карте по вашему местоположению на данный момент.
+        Необходимо подключить геоданные и перезагрузить приложение при отсутствии координат,
+        иначе объявление не будет показываться на карте</string>
+    <string name="no_coord">В данном объявлении отсутствует указание на местоположение</string>
 
 
 </resources>

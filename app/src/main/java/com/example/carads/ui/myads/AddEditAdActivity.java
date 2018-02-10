@@ -1,7 +1,13 @@
 package com.example.carads.ui.myads;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,15 +25,17 @@ import com.example.carads.storage.database.AppBase;
 import com.example.carads.storage.database.DatabaseManager;
 import com.example.carads.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
+import com.example.carads.ui.utilities.LocationPermission;
 import com.example.carads.ui.utilities.NetInspector;
 import com.example.carads.ui.utilities.Notification;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.List;
-import java.util.Observable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
@@ -37,7 +45,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class AddEditAdActivity extends AppCompatActivity {
+public class AddEditAdActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
 
     @Inject
@@ -46,12 +54,15 @@ public class AddEditAdActivity extends AppCompatActivity {
     @Inject
     FirebaseAuth firebaseAuth;
 
+    @Inject
+    LocationPermission locationPermission;
+
+
   private DatabaseManager databaseManager;
 
 
   private TextView tvMyAuth;
     private FirebaseUser user;
-
 
     private EditText etName;
     private EditText etImage;
@@ -65,12 +76,21 @@ public class AddEditAdActivity extends AppCompatActivity {
     private EditText  etPhone;
     private EditText  etMail;
     private EditText  etAddress;
+    private TextView tvLatitude;
+    private TextView tvLongitude;
+
     private boolean edit=true;
 
     private   Executor executor;
+    private double latitude;
+    private double longitude;
 
-   // private Spinner spinnerCities;
     private  CompositeDisposable subscription;
+
+    private GoogleApiClient googleApiClient;
+    private Location mLocation;
+    private LocationManager locationManager;
+//    private LocationRequest mLocationRequest;
 
     private Car car;
 
@@ -81,6 +101,7 @@ public class AddEditAdActivity extends AppCompatActivity {
 
 
         initComponents();
+        initComponentsForlocating();
         showUser(user);
         initData();
     }
@@ -111,11 +132,29 @@ public class AddEditAdActivity extends AppCompatActivity {
         etPhone=((TextInputLayout)findViewById(R.id.til_phone)).getEditText();
         etMail=((TextInputLayout)findViewById(R.id.til_mail)).getEditText();
         etAddress=((TextInputLayout)findViewById(R.id.til_address)).getEditText();
+
+        tvLatitude=(TextView) findViewById(R.id.tvLatitude);
+        tvLongitude=(TextView) findViewById(R.id. tvLongitude);
+
         //spinnerCities =(Spinner) findViewById(R.id.spinnerCities);
 
         databaseManager=new DatabaseManager(base);
         executor= Executors.newFixedThreadPool(1);
     }
+
+
+    private void initComponentsForlocating(){
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+    }
+
 
 
     private void showUser(FirebaseUser user){
@@ -134,6 +173,7 @@ private  void initData(){
     switch (select.getType()){
 
         case Constants.TYPE_ADD_AD:
+
             instruct();
             break;
 
@@ -163,6 +203,7 @@ private void editAd(){
     etOwner.setText(car.getOwner());
     etPhone.setText(car.getPhone());
     etMail.setText(car.getMail());
+    etAddress.setText(car.getAddress());
 }
 
     
@@ -179,7 +220,8 @@ private void saveData(){
 
     if(validateForm()){
 
-        if(edit){updateDataBase();}else{
+        if(edit){updateDataBase();
+        }else{
 
          if(NetInspector.isOnline(this)){ insertAdIntoDataBase();}
             else{showMessage(R.string.snack_no_network);  }
@@ -209,7 +251,8 @@ private void saveData(){
                             etOwner.getText().toString(),
                             etPhone.getText().toString(),
                             etMail.getText().toString(),
-                            etAddress.getText().toString()
+                            etAddress.getText().toString(),
+                            latitude,longitude
                     );
                     return null;
                 }
@@ -219,30 +262,6 @@ private void saveData(){
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(()->launchStatusUpdate(),
                         (error)-> Toast.makeText(this,getString(R.string.error_update_ad),Toast.LENGTH_LONG).show());
-
-
-
-
-//        executor.execute(() ->{
-//
-//    long update=databaseManager.updateCarFromBD(car.getId(),etName.getText().toString(),
-//            etImage.getText().toString(),
-//            etDate.getText().toString(),
-//            etMileage.getText().toString(),
-//            etColor.getText().toString(),
-//            Integer.parseInt(etPrice.getText().toString()),
-//            Double.valueOf(etValume.getText().toString()),
-//            Integer.parseInt(etPower.getText().toString()),
-//            etOwner.getText().toString(),
-//            etPhone.getText().toString(),
-//            etMail.getText().toString(),
-//            etAddress.getText().toString());
-//
-//            runOnUiThread(() ->launchStatusUpdate());
-//
-//
-//        } );
-
 
     }
 
@@ -271,7 +290,8 @@ private void saveData(){
                             etOwner.getText().toString(),
                             etPhone.getText().toString(),
                             etMail.getText().toString(),
-                            etAddress.getText().toString()
+                            etAddress.getText().toString(),
+                            latitude,longitude
                     ));
                     return null;
                 }
@@ -281,24 +301,6 @@ private void saveData(){
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(()->launchStatusInsert(),
                         (error)-> Toast.makeText(this,getString(R.string.error_insert_ad),Toast.LENGTH_LONG).show());
-
-//        executor.execute(() ->{
-//
-//            Long insert =  databaseManager.insertCarIntoBD(new Car(etName.getText().toString(),
-//                    etImage.getText().toString(),
-//                    etDate.getText().toString(),
-//                    etMileage.getText().toString(),
-//                    etColor.getText().toString(),
-//                    Integer.parseInt(etPrice.getText().toString()),
-//                    Double.valueOf(etValume.getText().toString()),
-//                    Integer.parseInt(etPower.getText().toString()),
-//                    etOwner.getText().toString(),
-//                    etPhone.getText().toString(),
-//                    etMail.getText().toString(),
-//                    etAddress.getText().toString()));
-//
-//            runOnUiThread(() ->launchStatusInsert(insert));
-//        } );
 
     }
 
@@ -316,6 +318,103 @@ private void saveData(){
 
     notification.showMessage(getString(message));
 }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case Constants.LOCATION_PERMISSION_REQUEST_CODE:
+                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED&& grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                    //срабатывает только один раз при получении разрешения
+
+                    showMessage(R.string.permission_location_granted);
+
+
+                } else {
+
+                    //простой вариант вариант без обязательного получения разрешения к хранилищу+убрать onActivityResult
+                    //в данном случае пользователь постоянно будет получать такое сообщение и будет пользоваться приложением
+                    //с ограниченными возможностями (без записи) или польхователь сам может найти настройки для доступа
+                    //к хранилищу  для приложения
+                    showMessage(R.string.permission_location_denied);
+                    onBackPressed();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+        locationPermission.requestPermission(this,()->receiveLocation());
+
+    }
+
+
+    @SuppressLint("MissingPermission")
+    private void receiveLocation() {
+
+        mLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        if (mLocation != null) {
+             latitude = mLocation.getLatitude();
+             longitude = mLocation.getLongitude();
+
+            Log.d("КООРДИНАТЫ",String.valueOf(latitude));
+            Log.d("КООРДИНАТЫ",String.valueOf(longitude));
+
+             tvLatitude.setText(String.valueOf(latitude));
+             tvLongitude.setText(String.valueOf(longitude));
+
+        }else{
+
+            showMessage(R.string.turn_on_location);
+
+        }
+
+    }
+
+
+
+
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i("ConnectionSuspended", "Connection Suspended");
+        googleApiClient.connect();
+    }
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.i("ConnectionFailed", "Connection failed. Error: " + connectionResult.getErrorCode());
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
+    }
+
+
+
 
 
 
@@ -405,6 +504,15 @@ private void saveData(){
         } else {
             etMail.setError(null);
         }
+
+        if (TextUtils.isEmpty(etAddress.getText().toString())) {
+            etAddress.setError(getString(R.string.fill_in_the_field));
+            valid = false;
+        } else {
+            etAddress.setError(null);
+        }
+
+
 
         return valid;
     }

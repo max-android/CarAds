@@ -4,7 +4,6 @@ import com.example.carads.storage.database.entity.Car;
 
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Single;
 
@@ -23,17 +22,12 @@ public class DatabaseManager {
     }
 
 
-//    public void writeDataIntoBD(List<Car> list) {
-//
-//        base.getCarDao().insertCars(list);
-//
-//
-//    }
 
     public void writeDataIntoBD(List<Car> list) {
 
      base.getCarDao().insertCars(list);
     }
+
 
 
     public Single<List<Car>> readAllDataFromBD() {
@@ -69,7 +63,7 @@ public class DatabaseManager {
         return list;
     }
 
-    public Single<List<Car>>  readValumeCarsFromBD(Double from_valume,Double to_valume) {
+    public Single<List<Car>>  readValumeCarsFromBD(double from_valume,double to_valume) {
 
         Single<List<Car>> list = base.getCarDao().getCarsByValume(from_valume,to_valume);
 
@@ -107,13 +101,6 @@ public class DatabaseManager {
     }
 
 
-//    public int deleteCarFromBD(String email){
-//
-//        //Single<Integer>  car =  base.getCarDao().deleteCarByParameter(email);
-//
-//        return base.getCarDao().deleteCarByParameter(email);
-//    }
-
 
     public int deleteCarFromBD(Car car){
 
@@ -123,9 +110,9 @@ public class DatabaseManager {
     }
 
 
-    public void  updateCarFromBD(int id,String name, String image, String date_issue, String mileage, String color, int price, double  valume, int power, String owner, String phone, String mail, String address){
+    public void  updateCarFromBD(int id,String name, String image, String date_issue, String mileage, String color, int price, double  valume, int power, String owner, String phone, String mail, String address,double latitude,double longitude){
 
-       base.getCarDao().updateCarDB(id,name,image,date_issue,mileage,color,price,valume,power,owner,phone,mail,address);
+       base.getCarDao().updateCarDB(id,name,image,date_issue,mileage,color,price,valume,power,owner,phone,mail,address,latitude,longitude);
 
 
     }

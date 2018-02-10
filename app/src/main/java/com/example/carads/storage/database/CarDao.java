@@ -60,6 +60,11 @@ public interface CarDao {
     @Query("SELECT * FROM car")
     Single<List<Car>> getAllCarsDB();
 
+
+    @Query("SELECT * FROM car")
+    List<Car> getAllCarsForSize();
+
+
    // @Query("DELETE car WHERE mail = :email")
 //    void deleteCarFromDB(String email);
 
@@ -78,7 +83,7 @@ public interface CarDao {
     Single<List<Car>> getCarsByPrice(int from_price,int to_price);
 
     @Query("SELECT * FROM car WHERE valume BETWEEN :from_valume AND :to_valume ORDER BY valume ASC")
-    Single<List<Car>> getCarsByValume(Double from_valume,Double to_valume);
+    Single<List<Car>> getCarsByValume(double from_valume,double to_valume);
 
     @Query("SELECT * FROM car WHERE power BETWEEN :from_power AND :to_power ORDER BY power ASC")
     Single<List<Car>> getCarsByPower(int from_power,int to_power);
@@ -110,7 +115,9 @@ public interface CarDao {
         "owner = :new_owner," +
         "phone = :new_phone," +
         "mail = :new_mail," +
-        "address = :new_address WHERE id = :new_id")
+        "address = :new_address," +
+        "latitude= :new_latitude," +
+        "longitude= :new_longitude WHERE id = :new_id")
            void updateCarDB(
                         int new_id,
                         String new_name,
@@ -119,12 +126,14 @@ public interface CarDao {
                         String new_mileage,
                         String new_color,
                         int new_price,
-                        Double new_valume,
+                        double new_valume,
                         int new_power,
                         String new_owner,
                         String new_phone,
                         String new_mail,
-                        String new_address
+                        String new_address,
+                        double new_latitude,
+                        double new_longitude
     );
 
 
