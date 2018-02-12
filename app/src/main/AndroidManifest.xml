@@ -39,19 +39,20 @@
         <activity android:name=".ui.filter.FilterActivity" />
         <activity
             android:name=".ui.search.SearchableActivity"
-            android:theme="@style/AppTheme" />
+
+            />
         <activity
             android:name=".ui.myads.MyAdsActivity"
-            android:label="@string/my_adds_label" />
+             />
         <activity
             android:name=".ui.myads.AddEditAdActivity"
-            android:label="@string/add_edit_label" />
+             />
         <activity android:name=".ui.setting.SettingsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.carads.ui.primary.CarActivity" />
+
         </activity>
-        <activity android:name=".ui.favorites.FavoritesActivity" />
+        <activity android:name=".ui.favorites.FavoritesActivity"
+
+            />
         <activity android:name=".ui.setting.DetailSettingsActivity" />
 
 

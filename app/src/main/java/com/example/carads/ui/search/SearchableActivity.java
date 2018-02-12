@@ -2,12 +2,14 @@ package com.example.carads.ui.search;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import com.example.carads.ui.utilities.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
@@ -55,6 +58,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
         initSelectCarsAds();
 
+        createItemTouch();
     }
 
 
@@ -68,19 +72,23 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         carsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //carsRecycler.addOnScrollListener(scrollListener);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
+
+       Toolbar toolbar=(Toolbar)findViewById(R.id.toolbarListCars);
+      //  setSupportActionBar(toolbar);
+      //  getSupportActionBar().setTitle(R.string.empty_body);
+        toolbar.setTitle(R.string.result_search);
+//        toolbar.setSubtitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
+
+
 
         searchIntoDB=new DatabaseManager(base);
         subscrition = new CompositeDisposable();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCarsLocation);
+        fab.setOnClickListener(floating ->{     } );
     }
 
 
@@ -136,9 +144,27 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
     }
 
 
+    private void showAllAds(ArrayList<Car> list){
+
+        Executors.newSingleThreadExecutor().execute(()-> {
+
+            try {
+                Thread.sleep(2000);
+                runOnUiThread(()->showDataFor(list));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+
+    }
+
+
     private void showDataFor(ArrayList<Car> list){
 
         carsRecycler.setAdapter(new AvtoAdapter(list,requestManager,this));
+
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -162,8 +188,8 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
         ArrayList<Car> totalList = (ArrayList<Car>)showAllAdsIntent.getSerializableExtra(Constants.KEY_TOTAL_CARS);
 
-        showDataFor(totalList);
-
+        //showDataFor(totalList);
+        showAllAds(totalList);
     }
 
     private void launchCarsFromSearch(){
@@ -204,7 +230,6 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         doMySearchByMarka(marka);
 
     }
-
 
 
     private void launchSelectAutoByDate(){
@@ -278,7 +303,6 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
     }
 
 
-
     private void doMySearchByMarka(String query) {
 
         subscrition.add(searchIntoDB.readAllDataFromBD()
@@ -290,7 +314,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list),query)
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
 
 //        subscrition.add(searchIntoDB.readMarkaFromBD(query)
 //
@@ -316,7 +340,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
 
     }
 
@@ -331,7 +355,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
 
     }
 
@@ -346,7 +370,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
 
     }
 
@@ -361,7 +385,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
 
     }
 
@@ -376,7 +400,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
                 .observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+                        ,(error) -> showError()));
     }
 
 
@@ -387,9 +411,15 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
             Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show();
         }
 
-        progressBar.setVisibility(View.INVISIBLE);
+        runOnUiThread(()-> progressBar.setVisibility(View.INVISIBLE));
 
     }
+
+          private void showError(){
+              Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show();
+
+              progressBar.setVisibility(View.INVISIBLE);
+          }
 
 
     @Override
@@ -444,5 +474,29 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         showDetail.setType(Constants.TYPE_COMMONS);
         startActivity(showDetail);
     }
+
+
+    private void createItemTouch(){
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(carsRecycler);
+    }
+
+    private ItemTouchHelper.SimpleCallback simpleCallback=new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            int fromPosition = viewHolder.getAdapterPosition();
+            int toPosition = target.getAdapterPosition();
+             AvtoAdapter adapter = (AvtoAdapter)carsRecycler.getAdapter();
+            adapter.adOnMove(fromPosition,toPosition);
+            return true;
+        }
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            AvtoAdapter adapter = (AvtoAdapter)carsRecycler.getAdapter();
+            adapter.adOnSwiped(viewHolder);
+        }
+    };
+
 
 }

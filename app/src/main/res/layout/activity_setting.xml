@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorScreen"
     tools:context="com.example.carads.ui.myads.MyAdsActivity">
 
 <android.support.v7.widget.Toolbar
 
     android:id="@+id/tbSetting"
     android:background="@color/colorPrimary"
-    app:title="@string/setting"
     app:titleTextColor="@color/colorWhite"
+    app:subtitleTextColor="@color/colorWhite"
     android:layout_width="match_parent"
  android:layout_height="?attr/actionBarSize">
 
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="@dimen/text_view_padding"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/help"
         style="@style/MyTextStyle"
         android:background="?selectableItemBackground" />
@@ -33,8 +34,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="@dimen/component_up_margin"
-        android:layout_marginBottom="@dimen/component_up_margin"
+        android:layout_margin="@dimen/component_up_margin"
         android:background="@drawable/divider" />
 
     <TextView
@@ -43,15 +43,14 @@
         android:layout_height="wrap_content"
 
         android:padding="@dimen/text_view_padding"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/app_info"
         style="@style/MyTextStyle"
         android:background="?selectableItemBackground" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="@dimen/component_up_margin"
-        android:layout_marginBottom="@dimen/component_up_margin"
+        android:layout_margin="@dimen/component_up_margin"
         android:background="@drawable/divider" />
 
     <TextView
@@ -60,15 +59,14 @@
         android:layout_height="wrap_content"
 
         android:padding="@dimen/text_view_padding"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/license"
         style="@style/MyTextStyle"
         android:background="?selectableItemBackground" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="@dimen/component_up_margin"
-        android:layout_marginBottom="@dimen/component_up_margin"
+        android:layout_margin="@dimen/component_up_margin"
         android:background="@drawable/divider" />
 
     <TextView
@@ -76,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/text_view_padding"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/config"
         style="@style/MyTextStyle"
         android:background="?selectableItemBackground" />

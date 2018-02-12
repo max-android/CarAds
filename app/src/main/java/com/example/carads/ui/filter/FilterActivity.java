@@ -2,8 +2,10 @@ package com.example.carads.ui.filter;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
@@ -52,6 +54,11 @@ private RadioButton rvPower;
          rbValue=(RadioButton)findViewById(R.id.rbValue);
          rvPower=(RadioButton)findViewById(R.id.rvPower);
 
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbarFilter);
+        toolbar.setTitle(R.string.select_filter);
+//        toolbar.setSubtitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
     }
 
 
@@ -104,6 +111,8 @@ private RadioButton rvPower;
         FragmentManager  manager =  getSupportFragmentManager();
 
         MarkaDialog markaDialog=new MarkaDialog();
+
+        markaDialog.setCancelable(false);
 
         markaDialog.show(manager, Constants.TAG_MARKA_DIALOG);
 

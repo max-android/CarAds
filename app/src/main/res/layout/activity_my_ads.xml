@@ -5,11 +5,14 @@
     android:id="@+id/lin_my_ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/list_screen"
     android:orientation="vertical"
+
     tools:context="com.example.carads.ui.myads.MyAdsActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarRegister"
+        android:id="@+id/toolbarMyAds"
+        app:titleTextColor="@color/colorWhite"
         app:subtitleTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
@@ -21,26 +24,27 @@
     <TextView
         android:id="@+id/tvMyMail"
         style="@style/MyTitulTextStyle"
-        android:layout_marginTop="@dimen/screen_padding"
+        android:padding="@dimen/container_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:background="@color/colorScreen"
         android:gravity="center"
         tools:text="User" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMyAdds"
-        android:layout_marginTop="@dimen/screen_padding"
+        android:padding="@dimen/container_padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tvInfoMyAds"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorScreen"
         style="@style/MyTitulTextStyle"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/color_comment_screen"
         android:padding="@dimen/container_padding"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:text="@string/empty_my_ads" />
 
 </LinearLayout>

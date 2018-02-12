@@ -30,6 +30,21 @@
     <color name="indigo">#3F51B5</color>
 
 
+    <color name="color_comment_screen">#F48FB1</color>
+
+
+    <color name="search_screen_old">#DEDEDE</color>
+
+    <color name="list_screen">#FAFAFA</color>
+    <color name="background_color">#90A4AE</color>
+
+
+
+
+
+
+
+
 
 
 </resources>

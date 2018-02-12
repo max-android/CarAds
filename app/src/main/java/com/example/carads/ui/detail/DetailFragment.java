@@ -2,9 +2,14 @@ package com.example.carads.ui.detail;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -38,7 +43,7 @@ import javax.inject.Inject;
  * Created by Максим on 15.01.2018.
  */
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener {
 
 
     @Inject
@@ -47,9 +52,12 @@ public class DetailFragment extends Fragment {
     @Inject
     RequestManager requestManager;
 
-    private Car car;
 
+
+    private MenuItem item;
+    private Car car;
     private Notification notification;
+    private  AppBarLayout appBarLayout;
 
 
     public DetailFragment() {
@@ -60,12 +68,16 @@ public class DetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Log.d("LIFESTYLE","onCreate");
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
+        Log.d("LIFESTYLE","onCreateView");
         return inflater.inflate(R.layout.fragment_detail,container,false);
     }
 
@@ -76,6 +88,8 @@ public class DetailFragment extends Fragment {
         initialData();
 
         initComponentsWithData(view);
+
+        Log.d("LIFESTYLE","onViewCreated");
     }
 
 
@@ -84,6 +98,7 @@ public class DetailFragment extends Fragment {
        car = (Car)getArguments().getSerializable(Constants.KEY_FRAG);
 
     }
+
 
 
     private void initComponentsWithData(View view){
@@ -95,13 +110,12 @@ public class DetailFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(" ");
-        toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
-        toolbar.setSubtitle(car.getName());
-        toolbar.setTitle(car.getName());
-        //toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
-        //ContexCompatt
-        //toolbar.setTitle(car.getName());
+       // toolbar.setTitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
+
+       // toolbar.setTitle(car.getName());
+
+        appBarLayout=(AppBarLayout)view.findViewById(R.id.appBar);
+
 
         notification = new Notification(view.findViewById(R.id.detailCoord),getContext());
 
@@ -176,20 +190,29 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
        // ((DetailActivity)getActivity()).getMenuInflater().inflate(R.menu.menu_share,menu);
-      inflater.inflate(R.menu.menu_share,menu);
-
+           inflater.inflate(R.menu.menu_share,menu);
+        item =  menu.findItem(R.id.favorite);
     }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        appBarLayout.addOnOffsetChangedListener(this);
+    }
+
+
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
         switch (item.getItemId()){
 
-//            case R.id.favorite:
-//                saveAdIntoFavorites();
-//                break;
+            case R.id.favorite:
+                saveAdIntoFavorites();
+                break;
 
             case R.id.share:
                 share();
@@ -250,4 +273,23 @@ public class DetailFragment extends Fragment {
         startActivity(Intent.createChooser(shareIntent,Constants.SHARE_SEARCH));
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        appBarLayout.removeOnOffsetChangedListener(this);
+    }
+
+
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+if(Math.abs(verticalOffset) == appBarLayout.getTotalScrollRange()){
+            item.setVisible(true);
+
+        }else{
+            item.setVisible(false);
+        }
+
+    }
 }

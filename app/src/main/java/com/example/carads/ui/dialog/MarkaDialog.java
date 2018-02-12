@@ -124,6 +124,9 @@ private MarkaDialogListener dialogListener;
         }
     }
 
+
+
+
     @Override
     public void onDetach() {
         super.onDetach();

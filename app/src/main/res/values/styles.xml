@@ -50,20 +50,22 @@
     </style>
 
 
-    <style name="MyCardViewStyle" parent="Theme.AppCompat">
+    <!--<style name="MyCardViewStyle" parent="Theme.AppCompat">-->
 
-        <item name="cardCornerRadius">@dimen/card_radius</item>
-        <item name="cardElevation">@dimen/card_elevation</item>
+        <!--<item name="cardCornerRadius">@dimen/card_radius</item>-->
+        <!--<item name="cardElevation">@dimen/card_elevation</item>-->
+        <!--<item name="cardMaxElevation">@dimen/card_max_elevation</item>-->
 
-        <item name="cardBackgroundColor">@color/colorScreen</item>
-    </style>
+        <!--<item name="cardBackgroundColor">@color/colorScreen</item>-->
+    <!--</style>-->
 
 
-    <!--<item name="android:textAllCaps">false</item>-->
+    <!--&lt;!&ndash;<item name="android:textAllCaps">false</item>&ndash;&gt;-->
 
-    <dimen name="card_radius">2dp</dimen>
-    <dimen name="card_elevation">6dp</dimen>
-    <!--<dimen name="card_padding">8dp</dimen>-->
+    <!--<dimen name="card_radius">2dp</dimen>-->
+    <!--<dimen name="card_elevation">4dp</dimen>-->
+    <!--<dimen name="card_max_elevation">8dp</dimen>-->
+    <!--&lt;!&ndash;<dimen name="card_padding">8dp</dimen>&ndash;&gt;-->
 
 
     <style name="MyHintText" parent="TextAppearance.AppCompat.Small">

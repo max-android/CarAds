@@ -2,11 +2,13 @@ package com.example.carads.ui.myads;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -90,10 +92,7 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
 
         showUserAds();
 
-
-
         super.onStart();
-
 
     }
 
@@ -109,6 +108,11 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
         recyclerMyAdds.setLayoutManager(mLayoutManager);
         recyclerMyAdds.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+
+        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarMyAds);
+        toolbar.setTitle(R.string.my_adds_label);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
       //  user = firebaseAuth.getCurrentUser();
 
 //        databaseManager = new DatabaseManager(base);

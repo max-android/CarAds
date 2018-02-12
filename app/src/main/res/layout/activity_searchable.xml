@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatListCars"
+    android:background="@color/list_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorScreen">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,6 +18,9 @@
             android:id="@+id/toolbarListCars"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+
+            app:titleTextColor="@color/colorWhite"
+            app:subtitleTextColor="@color/colorWhite"
             android:elevation="@dimen/toolbar_elevation"
             app:layout_scrollFlags="scroll|enterAlways" />
 
@@ -41,15 +44,20 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="invisible" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="visible" />
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabCarsLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:elevation="@dimen/fub_elevation"
+        android:src="@android:drawable/ic_menu_mapmode"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
+
+
+    <!--app:srcCompat="@android:drawable/ic_dialog_email"-->

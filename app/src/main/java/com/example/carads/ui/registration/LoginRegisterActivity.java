@@ -68,10 +68,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
         btnVerifyEmail.setOnClickListener(this::setListener);
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarRegister);
-                setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" ");
         toolbar.setTitle(R.string.register_user);
-        toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
 
         dialogProgress = new ProgressManager(this);
     }

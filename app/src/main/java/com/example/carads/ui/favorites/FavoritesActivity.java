@@ -2,6 +2,7 @@ package com.example.carads.ui.favorites;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -72,8 +73,10 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
         App.getAppComponent().injectFavoritesActivity(this);
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarFavorites);
+        toolbar.setTitle(R.string.favorite);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
 
-        toolbar.setSubtitle(getString(R.string.favorite));
 
         tvInfo=(TextView)findViewById(R.id.tvInfoFavorites);
 

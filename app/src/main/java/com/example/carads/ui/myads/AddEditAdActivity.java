@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -91,7 +92,7 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
     private Location mLocation;
     private LocationManager locationManager;
 //    private LocationRequest mLocationRequest;
-
+    private Toolbar toolbar;
     private Car car;
 
     @Override
@@ -112,8 +113,14 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
         App.getAppComponent().injectAddEditAdActivity(this);
 
         user = firebaseAuth.getCurrentUser();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+         toolbar = (Toolbar) findViewById(R.id.tbAddEditAd);
+
+        //setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
+        toolbar.setNavigationOnClickListener(exit -> onBackPressed());
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAddEditAd);
 
         tvMyAuth=(TextView)findViewById(R.id.tvMyAuth);
@@ -151,7 +158,7 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
     }
 
@@ -175,6 +182,7 @@ private  void initData(){
         case Constants.TYPE_ADD_AD:
 
             instruct();
+
             break;
 
         case Constants.TYPE_EDIT_AD:
@@ -189,6 +197,8 @@ private  void initData(){
 
 
 private void editAd(){
+
+    toolbar.setTitle(R.string.add_edit_label);
 
     car = (Car)getIntent().getSerializableExtra(Constants.EDIT);
 
@@ -209,6 +219,8 @@ private void editAd(){
     
     private void instruct(){
         edit=false;
+
+        toolbar.setTitle(R.string.add_ads);
 
         showMessage(R.string.not_filled);
     }

@@ -8,6 +8,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="container_padding">16dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="bottom_elevation">8dp</dimen>
     <dimen name="component_up_margin">16dp</dimen>
     <dimen name="component_up_margin_large">32dp</dimen>
     <dimen name="component_vertical_margin">4dp</dimen>
@@ -25,5 +27,9 @@
     <dimen name="text_snack">6sp</dimen>
 
     <dimen name="text_view_padding">16sp</dimen>
+
+
+    <dimen name="fub_elevation">12sp</dimen>
+    <dimen name="image_elevation">2sp</dimen>
 
 </resources>

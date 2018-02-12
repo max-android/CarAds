@@ -9,9 +9,11 @@
     tools:context="com.example.carads.ui.filter.FilterActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarFilter"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/colorWhite"
+        app:subtitleTextColor="@color/colorWhite"
         android:elevation="@dimen/toolbar_elevation"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
@@ -19,6 +21,7 @@
 
     <TextView
         android:id="@+id/tvSort"
+        style="@style/MyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/component_up_margin"

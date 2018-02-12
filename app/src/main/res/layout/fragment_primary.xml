@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingTop="@dimen/component_up_margin_large"
+    android:paddingBottom="@dimen/container_padding"
+    android:paddingStart="@dimen/container_padding"
+    android:paddingEnd="@dimen/container_padding"
+    android:background="@color/colorScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,7 +35,6 @@
             android:id="@+id/lin_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="vertical">
     <TextView
         android:id="@+id/tvInfoReg"
@@ -59,6 +62,7 @@
                 android:id="@+id/tvZaregistr"
                 style="@style/MyTitulTextStyle"
                 android:background="?selectableItemBackground"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/component_up_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

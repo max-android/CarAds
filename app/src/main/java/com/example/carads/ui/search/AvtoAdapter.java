@@ -12,6 +12,7 @@ import com.example.carads.R;
 import com.example.carads.storage.database.entity.Car;
 
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -55,6 +56,20 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
     }
 
 
+
+    public void adOnMove(int fromPos,int toPos) {
+
+
+        Collections.swap(results,fromPos,toPos);
+        notifyItemMoved(fromPos, toPos);
+    }
+
+    public void adOnSwiped(RecyclerView.ViewHolder viewHolder) {
+        int swipedPosition = viewHolder.getAdapterPosition();
+        results.remove(swipedPosition);
+
+        notifyItemRemoved(swipedPosition);
+    }
 
 
     class ViewHolder extends RecyclerView.ViewHolder{

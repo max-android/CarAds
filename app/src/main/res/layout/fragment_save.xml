@@ -3,16 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollSave"
+    android:background="@color/colorScreen"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 <LinearLayout
     android:orientation="vertical"
     android:id="@+id/linSave"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarSave"
+        app:titleTextColor="@color/colorWhite"
         app:subtitleTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
@@ -26,26 +29,27 @@
         android:layout_width="200dp"
         android:layout_height="125dp"
         android:layout_gravity="center_horizontal"
+        android:elevation="@dimen/image_elevation"
         android:layout_marginTop="24dp" />
     <Button
         android:id="@+id/saveOnPictures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_margin="24dp"
         android:theme="@style/ButtonTheme"
         android:text="@string/save_into_Pictures" />
     <Button
         android:id="@+id/saveOnSDCARD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_margin="24dp"
         android:theme="@style/ButtonTheme"
         android:text="@string/save_into_sdcard" />
     <Button
         android:id="@+id/saveOnInternal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_margin="24dp"
         android:theme="@style/ButtonTheme"
         android:text="@string/save_into_internal" />
 

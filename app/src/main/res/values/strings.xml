@@ -53,6 +53,7 @@
     <string name="favorites">Избранное</string>
 
     <string name="empty_body"> </string>
+    <string name="result_search">Результаты поиска</string>
 
 
     <string name="date_issue">Год выпуска</string>
@@ -187,7 +188,7 @@
 
 
     <string name="repeat_query">Попробуйте повторить запрос!</string>
-    <string name="add_edit_label">Добавление или изменение объявлений</string>
+    <string name="add_edit_label">Изменение объявления</string>
 
     <string name="help">Помощь</string>
     <string name="app_info">Информация о приложении</string>
@@ -214,6 +215,9 @@
         Необходимо подключить геоданные и перезагрузить приложение при отсутствии координат,
         иначе объявление не будет показываться на карте</string>
     <string name="no_coord">В данном объявлении отсутствует указание на местоположение</string>
+    <string name="select_filter">Выбор критериев поиска</string>
+
+    <string name="transition_car">transitionCar</string>
 
 
 </resources>

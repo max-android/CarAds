@@ -86,10 +86,10 @@ public class SaveFragment extends Fragment {
         App.getAppComponent().injectSaveFragment(SaveFragment.this);
         Toolbar toolbar = (Toolbar)view.findViewById(R.id.toolbarSave);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+       // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
-        toolbar.setSubtitle(car.getName());
+       // toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
+        toolbar.setTitle(car.getName());
 
 
         //toolbar.setTitle(car.getName());

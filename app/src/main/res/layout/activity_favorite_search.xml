@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lin_favorite"
+    android:background="@color/list_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/container_padding"
+
     tools:context="com.example.carads.ui.myads.MyAdsActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarFavorites"
+        app:titleTextColor="@color/colorWhite"
         app:subtitleTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
@@ -21,6 +23,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerFavorites"
+        android:padding="@dimen/container_padding"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -29,10 +32,11 @@
         android:id="@+id/tvInfoFavorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorScreen"
         style="@style/MyTitulTextStyle"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/color_comment_screen"
         android:padding="@dimen/container_padding"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:text="@string/empty_favorites" />
 
 </LinearLayout>
