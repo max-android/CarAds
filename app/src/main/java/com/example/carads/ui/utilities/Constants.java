@@ -130,5 +130,11 @@ public class Constants {
     public static final String OFFICIAL_MAIL= "servicecarads_officialmail@mail";
 
 
+    public static final String WRITE_DB_SUCCESSFULLY= "Данные успешно записаны в бд";
+    public static final String WRITE_DB_ERROR = "Данные не доступны";
+
+    public static final String ALL_DATA = "все объявления";
+
+
 
 }

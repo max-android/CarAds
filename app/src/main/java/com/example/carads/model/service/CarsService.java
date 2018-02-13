@@ -1,6 +1,6 @@
-package com.example.carads.service;
+package com.example.carads.model.service;
 
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 
 import java.util.ArrayList;
 import java.util.List;

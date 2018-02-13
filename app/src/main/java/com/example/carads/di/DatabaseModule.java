@@ -3,7 +3,8 @@ package com.example.carads.di;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.example.carads.storage.database.AppBase;
+import com.example.carads.model.storage.database.AppBase;
+import com.example.carads.model.storage.database.DatabaseManager;
 
 import javax.inject.Singleton;
 
@@ -33,6 +34,13 @@ public class DatabaseModule {
         AppBase base= Room.databaseBuilder(context,AppBase.class, "db_auto").build();
 
         return base;
+    }
+
+    @Provides
+    @Singleton
+    public DatabaseManager provideDatabaseManager(AppBase base){
+
+        return new DatabaseManager(base);
     }
 
 

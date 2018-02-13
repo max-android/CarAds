@@ -2,7 +2,7 @@ package com.example.carads.di;
 
 import android.content.Context;
 
-import com.example.carads.storage.file.FileManager;
+import com.example.carads.model.storage.file.FileManager;
 
 import javax.inject.Singleton;
 

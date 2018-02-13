@@ -2,7 +2,7 @@ package com.example.carads.di;
 
 import android.content.Context;
 
-import com.example.carads.storage.favorites.MyFavorites;
+import com.example.carads.model.storage.favorites.MyFavorites;
 
 import javax.inject.Singleton;
 

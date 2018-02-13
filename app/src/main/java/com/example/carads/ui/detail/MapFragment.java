@@ -11,15 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.carads.R;
-import com.example.carads.storage.database.entity.Car;
-import com.example.carads.ui.callbacks.SetFunc;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Picture;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**

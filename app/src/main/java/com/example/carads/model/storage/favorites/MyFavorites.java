@@ -1,4 +1,4 @@
-package com.example.carads.storage.favorites;
+package com.example.carads.model.storage.favorites;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -13,11 +13,10 @@ import android.widget.TextView;
 
 import com.example.carads.R;
 import com.example.carads.di.App;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.registration.LoginRegisterActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.utilities.Constants;
-import com.example.carads.ui.utilities.ProgressManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

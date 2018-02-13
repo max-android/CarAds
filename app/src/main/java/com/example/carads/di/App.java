@@ -28,6 +28,7 @@ public class App extends Application {
                 .permissionModule(new PermissionModule())
                         .fileModule(new FileModule(this))
                 .firebaseModule(new FirebaseModule())
+                .presenterModule(new PresenterModule())
                 .build();
     }
 

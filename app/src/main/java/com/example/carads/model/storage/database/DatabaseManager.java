@@ -1,6 +1,6 @@
-package com.example.carads.storage.database;
+package com.example.carads.model.storage.database;
 
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 
 
 import java.util.List;
@@ -32,12 +32,27 @@ public class DatabaseManager {
 
     public Single<List<Car>> readAllDataFromBD() {
 
-
         Single<List<Car>> list = base.getCarDao().getAllCarsDB();
 
         return list;
-
     }
+
+
+    public Single<Integer> readSizeFromBD() {
+
+        Single<Integer> size = base.getCarDao().getSizeDB();
+
+        return size;
+    }
+
+
+
+    public boolean isEmptyDB(){
+
+        return base.getCarDao().getAllCarsForSize().isEmpty();
+    }
+
+
 
 
     public Single<List<Car>>readMarkaFromBD(String marka) {

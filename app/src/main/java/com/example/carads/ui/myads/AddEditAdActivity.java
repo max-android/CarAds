@@ -1,7 +1,6 @@
 package com.example.carads.ui.myads;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -22,16 +21,15 @@ import android.widget.Toast;
 
 import com.example.carads.R;
 import com.example.carads.di.App;
-import com.example.carads.storage.database.AppBase;
-import com.example.carads.storage.database.DatabaseManager;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.AppBase;
+import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.LocationPermission;
 import com.example.carads.ui.utilities.NetInspector;
 import com.example.carads.ui.utilities.Notification;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

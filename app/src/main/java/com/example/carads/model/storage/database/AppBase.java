@@ -1,9 +1,9 @@
-package com.example.carads.storage.database;
+package com.example.carads.model.storage.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 
 
 /**

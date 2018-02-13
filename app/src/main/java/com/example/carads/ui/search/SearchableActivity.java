@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
-import com.example.carads.storage.database.AppBase;
-import com.example.carads.storage.database.DatabaseManager;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.AppBase;
+import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.di.App;
 import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.utilities.Constants;

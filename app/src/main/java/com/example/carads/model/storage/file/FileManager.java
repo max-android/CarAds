@@ -1,4 +1,4 @@
-package com.example.carads.storage.file;
+package com.example.carads.model.storage.file;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 
 import com.example.carads.R;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
 
 import java.io.BufferedWriter;

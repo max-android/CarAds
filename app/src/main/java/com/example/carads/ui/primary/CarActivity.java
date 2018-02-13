@@ -12,17 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.support.design.widget.TabLayout;
-
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.RequestManager;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
+import com.example.carads.presenter.PrimaryPresenter;
 import com.example.carads.ui.filter.FilterActivity;
 import com.example.carads.ui.myads.AddEditAdActivity;
 import com.example.carads.ui.myads.MyAdsActivity;
@@ -31,29 +29,16 @@ import com.example.carads.ui.favorites.FavoritesActivity;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.setting.SettingsActivity;
 import com.example.carads.ui.utilities.Constants;
-import com.example.carads.service.CarsService;
 import com.example.carads.R;
-import com.example.carads.storage.database.AppBase;
-import com.example.carads.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.di.App;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
-
 import javax.inject.Inject;
-
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class CarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Inject
-    CarsService service;
 
     @Inject
     RequestManager requestManager;
@@ -64,15 +49,14 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     @Inject
     FirebaseAuth firebaseAuth;
 
+    @Inject
+    PrimaryPresenter primaryPresenter;
+
     private FirebaseUser currentUser;
-   private View headerView;
-    private  TextView  tvHeaderStatusReg;
+    private View headerView;
+    private TextView  tvHeaderStatusReg;
     private DrawerLayout drawer;
     private SearchView searchView;
-    private  CompositeDisposable subscription;
-
-    private List<Car> carList;
-    private  DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +74,13 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
 
         updateNavigationHeader(currentUser);
 
-        checkAvailabilityDB();
-
-       // initData();
-
         super.onStart();
     }
-
 
  private void initComponentsOnCreate(){
 
      Toolbar toolbar=(Toolbar)findViewById(R.id.mainToolBar);
      setSupportActionBar(toolbar);
-     //getSupportActionBar().setTitle(R.string.example2);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -111,14 +89,12 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
      drawer.addDrawerListener(toggle);
      toggle.syncState();
 
-
      NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
      navigationView.setNavigationItemSelectedListener(this);
 
       headerView =  navigationView.getHeaderView(0);
 
      headerView.setOnClickListener(v -> launchLoginOrRegistration());
-
 
      SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
      searchView = (SearchView) findViewById(R.id.searchView);
@@ -138,23 +114,15 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     private void initComponentsOnStart(){
         App.getAppComponent().injectMainActivity(this);
 
+        primaryPresenter.getParam(()->Constants.ALL_DATA);
+        primaryPresenter.setTransmitter(list->launchDataIntoFrag(new ArrayList<Car>(list)));
+        primaryPresenter.setMistake(this::showMessage );
+
         currentUser=firebaseAuth.getCurrentUser();
 
         tvHeaderStatusReg = (TextView) headerView.findViewById(R.id.tvHeaderStatusReg);
 
-         databaseManager = new DatabaseManager(base);
-
-        subscription = new CompositeDisposable();
-
-
     }
-
-
-
-
-
-
-
 
 
  private void updateNavigationHeader(FirebaseUser currentUser){
@@ -171,7 +139,6 @@ if(currentUser!=null){
 }
 
  }
-
 
 
 private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryTextListener() {
@@ -202,77 +169,6 @@ private SearchView.OnQueryTextListener queryTextListener=new SearchView.OnQueryT
 };
 
 
-
- private void checkAvailabilityDB(){
-
-     Executors.newSingleThreadExecutor().execute(()-> {
-
-        if(base.getCarDao().getAllCarsForSize().isEmpty()){
-
-                runOnUiThread(this::insertDataIntoDB );
-
-        }else{
-                runOnUiThread(this::initDataFromDB);
-        }
-     });
- }
-
-
- private void initDataFromDB(){
-     subscription.add(databaseManager.readAllDataFromBD()
-             //.doOnSuccess(list ->Collections.shuffle(list))
-             //.doOnSuccess(list ->showLog(list))
-             .subscribeOn(Schedulers.io())
-
-             .observeOn(AndroidSchedulers.mainThread())
-
-             .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
-                     ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
- }
-
-
- private void insertDataIntoDB(){
-
-     carList = service.getCars();
-
-     Completable.fromCallable(
-             ()->{
-                 databaseManager.writeDataIntoBD(carList);
-
-                 return null;
-             }
-
-     ).subscribeOn(Schedulers.io())
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(()-> Log.d("successfully",getString(R.string.data_successfully)),
-                     (error)-> Log.d("error_insert",getString(R.string.data_insert_error_db)));
-
-     launchDataIntoFrag(new ArrayList<Car>(carList));
-
- }
-
-
-//    private  void initData(){
-//
-//        DatabaseManager databaseManager = new DatabaseManager(base);
-//
-//        subscription = new CompositeDisposable();
-//
-//        subscription.add(databaseManager.readAllDataFromBD()
-//
-//                .subscribeOn(Schedulers.io())
-//
-//                .observeOn(AndroidSchedulers.mainThread())
-//
-//                .subscribe (list ->  launchDataIntoFrag(new ArrayList<Car>(list))
-//                        ,(error) -> Toast.makeText(this,"Error-readAllDataFromBD()",Toast.LENGTH_LONG).show()));
-//
-//
-//
-//}
-
-
-
 private void launchLoginOrRegistration(){
 
         Intent registerIntent=new Intent(this, LoginRegisterActivity.class);
@@ -281,7 +177,6 @@ private void launchLoginOrRegistration(){
 
     navigationBackPressed();
 }
-
 
 
     private void launchDataIntoFrag(ArrayList<Car> cars) {
@@ -381,8 +276,6 @@ private void navigationBackPressed(){
     }
 
 
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -474,7 +367,8 @@ private void navigationBackPressed(){
     protected void onDestroy() {
         super.onDestroy();
 
-        subscription.clear();
+   primaryPresenter.dismissalResource();
+
     }
 }
 

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 
 
 import java.util.Collections;

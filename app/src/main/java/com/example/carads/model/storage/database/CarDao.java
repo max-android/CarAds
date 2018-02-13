@@ -1,19 +1,16 @@
-package com.example.carads.storage.database;
+package com.example.carads.model.storage.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 /**
@@ -64,6 +61,8 @@ public interface CarDao {
     @Query("SELECT * FROM car")
     List<Car> getAllCarsForSize();
 
+    @Query("SELECT COUNT(*) FROM car")
+    Single<Integer> getSizeDB();
 
    // @Query("DELETE car WHERE mail = :email")
 //    void deleteCarFromDB(String email);

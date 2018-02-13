@@ -11,10 +11,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.carads.R;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
-
-import java.util.Collections;
 
 
 public class DetailActivity extends AppCompatActivity {

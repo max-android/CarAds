@@ -1,6 +1,6 @@
 package com.example.carads.di;
 
-import com.example.carads.service.CarsService;
+import com.example.carads.model.service.CarsService;
 
 import javax.inject.Singleton;
 

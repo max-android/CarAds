@@ -2,17 +2,12 @@ package com.example.carads.ui.detail;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,9 +24,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
-import com.example.carads.storage.database.entity.Car;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.di.App;
-import com.example.carads.storage.favorites.MyFavorites;
+import com.example.carads.model.storage.favorites.MyFavorites;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Notification;
 

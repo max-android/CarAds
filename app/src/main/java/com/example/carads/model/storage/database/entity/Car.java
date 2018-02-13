@@ -1,4 +1,4 @@
-package com.example.carads.storage.database.entity;
+package com.example.carads.model.storage.database.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

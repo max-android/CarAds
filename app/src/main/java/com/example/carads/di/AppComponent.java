@@ -25,7 +25,8 @@ import dagger.Component;
         MyFavoritesModule.class,
         PermissionModule.class,
         FileModule.class,
-        FirebaseModule.class
+        FirebaseModule.class,
+        PresenterModule.class
 })
 
  public interface AppComponent {
