@@ -32,6 +32,7 @@ import com.example.carads.ui.utilities.Constants;
 import com.example.carads.R;
 import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.di.App;
+import com.example.carads.ui.utilities.Message;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
@@ -114,7 +115,7 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     private void initComponentsOnStart(){
         App.getAppComponent().injectMainActivity(this);
 
-        primaryPresenter.getParam(()->Constants.ALL_DATA);
+        primaryPresenter.getParam(()-> Message.ALL_DATA);
         primaryPresenter.setTransmitter(list->launchDataIntoFrag(new ArrayList<Car>(list)));
         primaryPresenter.setMistake(this::showMessage );
 

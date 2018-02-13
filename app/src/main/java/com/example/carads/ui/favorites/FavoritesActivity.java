@@ -19,6 +19,7 @@ import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.model.storage.favorites.MyFavorites;
+import com.example.carads.presenter.FavoritesPresenter;
 import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.search.AvtoAdapter;
 import com.example.carads.ui.utilities.Constants;
@@ -50,6 +51,8 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
     @Inject
     RequestManager requestManager;
 
+    @Inject
+    FavoritesPresenter favoritesPresenter;
 
     private TextView tvInfo;
     private RecyclerView recyclerFavorites;
@@ -72,11 +75,11 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
 
         App.getAppComponent().injectFavoritesActivity(this);
 
+
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarFavorites);
         toolbar.setTitle(R.string.favorite);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
-
 
         tvInfo=(TextView)findViewById(R.id.tvInfoFavorites);
 
@@ -89,7 +92,12 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        favoritesPresenter.dismissalResource();
+    }
 
     //поиск объявлений: по ключам SharedPref мы делаем запрос в бд и получаем объекты Car и кладем в список
     private void launchListFavorites() {
@@ -106,14 +114,10 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
 
         for (Map.Entry<String, ?> entry : favorites.entrySet()) {
 
-            subscription.add(databaseManager.readFavoritesCarFromBD(entry.getKey())
+            favoritesPresenter.getParam(()->entry.getKey());
+            favoritesPresenter.setTransmitter(car -> showCars(car));
+            favoritesPresenter.setMistake(error ->Toast.makeText(this, error, Toast.LENGTH_LONG).show() );
 
-                    .subscribeOn(Schedulers.io())
-
-                    .observeOn(AndroidSchedulers.mainThread())
-
-                    .subscribe(car -> showCars(car)
-                            , (error) -> Toast.makeText(this, getString(R.string.not_found_ads), Toast.LENGTH_LONG).show()));
         }
 
     }else{showTextInfo();}
@@ -133,7 +137,6 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
 
         tvInfo.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
     }
-
 
 
     private void showCars(Car car){
@@ -182,7 +185,6 @@ new Thread(()->{
         dialog.showDialog(this,drawable,()-> deleteEntryIntoFavorites(car),()->showDetailInfo(car),R.string.select_ad,R.string.question,R.string.detail);
 
     }
-
 
 
     private void showDetailInfo(Car car) {

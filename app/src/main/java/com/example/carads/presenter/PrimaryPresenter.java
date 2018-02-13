@@ -7,6 +7,7 @@ import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Constants;
+import com.example.carads.ui.utilities.Message;
 
 import java.util.List;
 
@@ -57,10 +58,7 @@ public class PrimaryPresenter implements TransmitterDataForReqiest,TransmitterCl
     }
 
 
-    @Override
-    public void dismissalResource() {
-           subscrition.clear();
-    }
+
 
     private void checkAvailabilityDB(){
 
@@ -68,7 +66,7 @@ public class PrimaryPresenter implements TransmitterDataForReqiest,TransmitterCl
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> initData(integer)
-                        ,error -> mistake.showError(Constants.WRITE_DB_ERROR)));
+                        ,error -> mistake.showError(Message.WRITE_DB_ERROR)));
     }
 
 
@@ -83,7 +81,7 @@ public class PrimaryPresenter implements TransmitterDataForReqiest,TransmitterCl
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(list -> transmitter.showCars(list)
-                        ,error -> mistake.showError(Constants.WRITE_DB_ERROR)));
+                        ,error -> mistake.showError(Message.WRITE_DB_ERROR)));
     }
 
     private void insertDataIntoDB(){
@@ -95,11 +93,15 @@ public class PrimaryPresenter implements TransmitterDataForReqiest,TransmitterCl
                 }
         ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()-> Log.d("successfully", Constants.WRITE_DB_SUCCESSFULLY),
-                        error-> mistake.showError(Constants.WRITE_DB_ERROR));
+                .subscribe(()-> Log.d("successfully", Message.WRITE_DB_SUCCESSFULLY),
+                        error-> mistake.showError(Message.WRITE_DB_ERROR));
 
         transmitter.showCars(service.getCars());
     }
 
 
+    @Override
+    public void dismissalResource() {
+        subscrition.clear();
+    }
 }

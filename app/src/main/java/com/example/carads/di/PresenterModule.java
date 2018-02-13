@@ -2,6 +2,7 @@ package com.example.carads.di;
 
 import com.example.carads.model.service.CarsService;
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.presenter.FavoritesPresenter;
 import com.example.carads.presenter.PrimaryPresenter;
 
 import javax.inject.Singleton;
@@ -27,8 +28,12 @@ public class PresenterModule {
         return  new PrimaryPresenter(carsService,databaseManager);
     }
 
+    @Provides
+    @Singleton
+    public FavoritesPresenter provideFavoritesPresenter(DatabaseManager databaseManager){
 
-
+        return new FavoritesPresenter(databaseManager);
+    }
 
 
 }
