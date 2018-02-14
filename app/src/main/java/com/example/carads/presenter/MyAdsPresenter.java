@@ -3,7 +3,7 @@ package com.example.carads.presenter;
 import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.presenter.transmitters.TransmitterCleaning;
-import com.example.carads.presenter.transmitters.TransmitterDataForDelete;
+import com.example.carads.presenter.transmitters.TransmitterSimpleDataForRequest;
 import com.example.carads.presenter.transmitters.TransmitterDataFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterMessageFromPresenter;
@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Максим on 14.02.2018.
  */
 
-public class MyAdsPresenter implements TransmitterParamForRequest,TransmitterCleaning,TransmitterDataForDelete {
+public class MyAdsPresenter implements TransmitterParamForRequest,TransmitterCleaning,TransmitterSimpleDataForRequest {
 
 
     @Inject

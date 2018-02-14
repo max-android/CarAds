@@ -2,6 +2,7 @@ package com.example.carads.ui.favorites;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -150,7 +154,7 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
 
 
     @Override
-    public void onCarClick(Car car) {
+    public void onCarClick(Car car, View view) {
 
 
 new Thread(()->{
@@ -158,7 +162,7 @@ new Thread(()->{
     try {
         Drawable drawable  = new Picture().drawableFromUrl(car.getImage());
        // Drawable drawable  = drawableFromUrl(car.getImage());
-        runOnUiThread(()->showDialog(drawable,car));
+        runOnUiThread(()->showDialog(drawable,car,view));
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -172,20 +176,25 @@ new Thread(()->{
 
 
               //вызов диалога и три действия на выбор
-    private void showDialog(Drawable drawable,Car car){
+    private void showDialog(Drawable drawable,Car car,View view){
 
         Dialog dialog=new Dialog();
-        dialog.showDialog(this,drawable,()-> deleteEntryIntoFavorites(car),()->showDetailInfo(car),R.string.select_ad,R.string.question,R.string.detail);
+        dialog.showDialog(this,drawable,()-> deleteEntryIntoFavorites(car),()->showDetailInfo(car,view),R.string.select_ad,R.string.question,R.string.detail);
 
     }
 
 
-    private void showDetailInfo(Car car) {
+    private void showDetailInfo(Car car,View view) {
+
+        ImageView imageView = (ImageView) view;
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView,Constants.TRANSITION_IMAGE);
+
 
 Intent detailIntent = new Intent(this, DetailActivity.class);
         detailIntent.putExtra(Constants.FAVOR,car);
         detailIntent.setType(Constants.TYPE_FAVORITES);
-             startActivity(detailIntent);
+             startActivity(detailIntent,options.toBundle());
     }
 
     private void deleteEntryIntoFavorites(Car car) {

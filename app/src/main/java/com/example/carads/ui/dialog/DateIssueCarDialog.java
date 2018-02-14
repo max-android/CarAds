@@ -105,7 +105,7 @@ public class DateIssueCarDialog extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
 
-            if(Integer.valueOf(toDate)>Integer.valueOf(fromDate)){
+            if(Integer.valueOf(toDate)>Integer.valueOf(fromDate)||Integer.valueOf(toDate).equals(Integer.valueOf(fromDate))){
 
             dialogListener.onDateIssueSet(fromDate,toDate);
 

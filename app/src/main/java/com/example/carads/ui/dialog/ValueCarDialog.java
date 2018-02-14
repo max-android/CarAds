@@ -84,7 +84,7 @@ public class ValueCarDialog extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
 
-            if(Double.valueOf(toValue)>Double.valueOf(fromValue)){
+            if(Double.valueOf(toValue)>Double.valueOf(fromValue)||Double.valueOf(toValue).equals(Double.valueOf(fromValue))){
 
                 dialogListener.onValueSet(fromValue,toValue);
 

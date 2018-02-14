@@ -2,6 +2,7 @@ package com.example.carads.ui.search;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -21,33 +23,36 @@ import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.entity.AutoTransmitter;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.di.App;
+import com.example.carads.presenter.SearchablePresenter;
 import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.utilities.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class SearchableActivity extends AppCompatActivity implements AvtoAdapter.CarClickListener {
 
+
+
+    @Inject
+    SearchablePresenter searchablePresenter;
+
+
     private RecyclerView carsRecycler;
     private ProgressBar progressBar;
-    private DatabaseManager searchIntoDB;
-    private CompositeDisposable subscrition;
+
 
     @Inject
     RequestManager requestManager;
 
-    @Inject
-    AppBase base;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +87,6 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
 
-
-
-        searchIntoDB=new DatabaseManager(base);
-        subscrition = new CompositeDisposable();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCarsLocation);
         fab.setOnClickListener(floating ->{     } );
@@ -149,7 +150,7 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         Executors.newSingleThreadExecutor().execute(()-> {
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 runOnUiThread(()->showDataFor(list));
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -163,7 +164,13 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
     private void showDataFor(ArrayList<Car> list){
 
-        carsRecycler.setAdapter(new AvtoAdapter(list,requestManager,this));
+        if(list.size()==0){
+
+            showMessage();
+        }else {
+
+            carsRecycler.setAdapter(new AvtoAdapter(list, requestManager, this));
+        }
 
         progressBar.setVisibility(View.INVISIBLE);
     }
@@ -171,14 +178,23 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
     private void showDataFor(ArrayList<Car> list,String marka){
 
-        ArrayList<Car> newList=new ArrayList<>();
+        if(list.size()==0){
 
-        for(Car car:list){
-            if(car.getName().toLowerCase().contains(marka.toLowerCase())){
-                newList.add(car);
+            showMessage();
+
+        }else{
+
+            ArrayList<Car> newList=new ArrayList<>();
+
+            for(Car car:list){
+                if(car.getName().toLowerCase().contains(marka.toLowerCase())){
+                    newList.add(car);
+                }
             }
+            carsRecycler.setAdapter(new AvtoAdapter(newList,requestManager,this));
+
         }
-        carsRecycler.setAdapter(new AvtoAdapter(newList,requestManager,this));
+
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -188,17 +204,10 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
         ArrayList<Car> totalList = (ArrayList<Car>)showAllAdsIntent.getSerializableExtra(Constants.KEY_TOTAL_CARS);
 
-        //showDataFor(totalList);
         showAllAds(totalList);
     }
 
     private void launchCarsFromSearch(){
-
-//        Intent intent = getIntent();
-//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//            String query = intent.getStringExtra(SearchManager.QUERY);
-//            doMySearchByMarka(query);
-//        }
 
         Intent intent = getIntent();
 
@@ -305,115 +314,69 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
 
     private void doMySearchByMarka(String query) {
 
-        subscrition.add(searchIntoDB.readAllDataFromBD()
-
-                .doOnSuccess(list -> showHint(list))
-
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list),query)
-                        ,(error) -> showError()));
-
-//        subscrition.add(searchIntoDB.readMarkaFromBD(query)
-//
-//                .doOnSuccess(list -> showHint(list))
-//
-//                .subscribeOn(Schedulers.io())
-//
-//                .observeOn(AndroidSchedulers.mainThread())
-//
-//                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-//                        ,(error) -> Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show()));
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.MARKA_TRANSMITTER,query));
+        searchablePresenter.setTransmitter(list -> showDataFor(new ArrayList<Car>(list),query));
+        searchablePresenter.setMistake(error -> showError());
 
     }
 
-    private void doMySearchByDate(String from_date,String to_date) {
-
-        subscrition.add(searchIntoDB.readDateIssueFromBD(from_date,to_date)
-
-                .doOnSuccess(list -> showHint(list))
-
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> showError()));
-
-    }
-
-    private void doMySearchByPrice(String from_price,String to_price) {
-
-        subscrition.add(searchIntoDB.readPriceCarsFromBD(Integer.valueOf(from_price),Integer.valueOf(to_price))
-
-                .doOnSuccess(list -> showHint(list))
-
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> showError()));
-
-    }
 
     private void doMySearchByColor(String query) {
 
-        subscrition.add(searchIntoDB.readColorCarsFromBD(query)
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.COLOR_TRANSMITTER,query));
 
-                .doOnSuccess(list -> showHint(list))
-
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> showError()));
+        initSettersPresenter();
 
     }
 
+
+    private void doMySearchByPrice(String from_price,String to_price) {
+
+
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.PRICE_TRANSMITTER,from_price,to_price));
+
+        initSettersPresenter();
+
+    }
+
+
+    private void doMySearchByDate(String from_date,String to_date) {
+
+
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.DATE_TRANSMITTER,from_date,to_date));
+
+        initSettersPresenter();
+
+
+    }
+
+
     private void doMySearchByValue(String from_value,String to_value){
 
-        subscrition.add(searchIntoDB.readValumeCarsFromBD(Double.valueOf(from_value),Double.valueOf(to_value))
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.VALUE_TRANSMITTER,from_value,to_value));
 
-                .doOnSuccess(list -> showHint(list))
-
-                .subscribeOn(Schedulers.io())
-
-                .observeOn(AndroidSchedulers.mainThread())
-
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> showError()));
+        initSettersPresenter();
 
     }
 
     private void doMySearchByPower(String from_power,String to_power){
 
-        subscrition.add(searchIntoDB.readPowerCarsFromBD(Integer.valueOf(from_power),Integer.valueOf(to_power))
 
-                .doOnSuccess(list -> showHint(list))
+        searchablePresenter.getObj(()-> new AutoTransmitter(Constants.POWER_TRANSMITTER,from_power,to_power));
 
-                .subscribeOn(Schedulers.io())
+        initSettersPresenter();
 
-                .observeOn(AndroidSchedulers.mainThread())
+    }
 
-                .subscribe (list ->  showDataFor(new ArrayList<Car>(list))
-                        ,(error) -> showError()));
+
+    private void initSettersPresenter(){
+
+        searchablePresenter.setTransmitter(list -> showDataFor(new ArrayList<Car>(list)));
+        searchablePresenter.setMistake(error -> showError());
+
     }
 
 
-    private void showHint(List<Car> list) {
-
-        if(list.size()==0){
-
-            Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show();
-        }
-
-        runOnUiThread(()-> progressBar.setVisibility(View.INVISIBLE));
-
-    }
 
           private void showError(){
               Toast.makeText(this,Constants.INVALID_QUERY,Toast.LENGTH_LONG).show();
@@ -455,24 +418,29 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
     }
 
     @Override
-    public void onCarClick(Car car) {
+    public void onCarClick(Car car,View view) {
 
-        showDetailDataCar(car);
+        showDetailDataCar(car,view);
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        subscrition.clear();
+
+        searchablePresenter.dismissalResource();
+
     }
 
 
-    private  void showDetailDataCar(Car car){
+    private  void showDetailDataCar(Car car,View view){
+        ImageView imageView = (ImageView) view;
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView,Constants.TRANSITION_IMAGE);
         Intent showDetail = new Intent(this, DetailActivity.class);
         showDetail.putExtra(Constants.DETAIL_OF_CAR,car);
         showDetail.setType(Constants.TYPE_COMMONS);
-        startActivity(showDetail);
+        startActivity(showDetail,options.toBundle());
     }
 
 

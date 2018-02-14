@@ -1,14 +1,10 @@
 package com.example.carads.presenter;
 
-import android.widget.Toast;
-
-import com.example.carads.R;
 import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.AutoTransmitter;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.presenter.transmitters.TransmitterCleaning;
-import com.example.carads.presenter.transmitters.TransmitterDataForDelete;
-import com.example.carads.presenter.transmitters.TransmitterDataForUpdIns;
+import com.example.carads.presenter.transmitters.TransmitterComplexDataForRequest;
 import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterMessageFromPresenter;
 import com.example.carads.ui.callbacks.GetFunc;
@@ -26,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Максим on 14.02.2018.
  */
 
-public class AddEditAdPresenter implements TransmitterCleaning,TransmitterDataForUpdIns {
+public class AddEditAdPresenter implements TransmitterCleaning,TransmitterComplexDataForRequest {
 
 
     @Inject

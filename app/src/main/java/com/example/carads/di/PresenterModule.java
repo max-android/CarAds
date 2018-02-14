@@ -6,6 +6,8 @@ import com.example.carads.presenter.AddEditAdPresenter;
 import com.example.carads.presenter.FavoritesPresenter;
 import com.example.carads.presenter.MyAdsPresenter;
 import com.example.carads.presenter.PrimaryPresenter;
+import com.example.carads.presenter.SearchablePresenter;
+
 
 import javax.inject.Singleton;
 
@@ -52,5 +54,10 @@ public class PresenterModule {
     }
 
 
+    @Provides
+    @Singleton
+    public SearchablePresenter provideSearchablePresenter(DatabaseManager databaseManager){
 
+        return new SearchablePresenter(databaseManager);
+    }
 }

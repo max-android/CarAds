@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
@@ -144,15 +146,20 @@ public class AutoFragment extends Fragment implements AvtoAdapter.CarClickListen
 
 
     @Override
-    public void onCarClick(Car car) {
+    public void onCarClick(Car car,View view) {
 
-        launchDetailCar(car);
+        launchDetailCar(car,view);
 
     }
 
 
 
-    private void launchDetailCar(Car car){
+    private void launchDetailCar(Car car,View view){
+
+        ImageView imageView = (ImageView) view;
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),imageView,Constants.TRANSITION_IMAGE);
+
 
         Intent intent = new Intent(getContext(), DetailActivity.class);
 
@@ -160,7 +167,7 @@ public class AutoFragment extends Fragment implements AvtoAdapter.CarClickListen
 
         intent.setType(Constants.TYPE_RANDOM);
 
-           startActivity(intent);
+           startActivity(intent,options.toBundle());
     }
 
 

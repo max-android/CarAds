@@ -7,7 +7,7 @@ import com.example.carads.ui.callbacks.GetFunc;
  * Created by Максим on 14.02.2018.
  */
 
-public interface TransmitterDataForDelete {
+public interface TransmitterSimpleDataForRequest {
 
     void getObj(GetFunc<Car> data);
 

@@ -21,7 +21,7 @@ public class Constants {
 
 
     public static final String INVALID_QUERY ="По данному запросу ничего не найдено !";
-    public static final String REPEAT_QUERY ="Попробуйте повторить запрос !";
+    public static final String REPEAT_QUERY ="Попробуйте сделать другой запрос!По данному запросу ничего не найдено!";
 
     public static final String SEARCH_HINT ="Поиск по марке";
 
@@ -138,7 +138,17 @@ public class Constants {
     public static final int ID_DEFAULT = 0;
 
 
+    public static final String PRICE_TRANSMITTER = "price_transmitter";
+    public static final String DATE_TRANSMITTER = "date_transmitter";
+    public static final String POWER_TRANSMITTER = "power_transmitter";
+    public static final String VALUE_TRANSMITTER = "value_transmitter";
 
+
+    public static final String COLOR_TRANSMITTER = "color_transmitter";
+    public static final String MARKA_TRANSMITTER = "marka_transmitter";
+
+
+    public static final String TRANSITION_IMAGE = "transition_image";
 
 
 

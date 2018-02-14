@@ -92,14 +92,13 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
             tvPrice=(TextView)itemView.findViewById(R.id.tvPrice);
             tvMileage=(TextView)itemView.findViewById(R.id.tvMileage);
 
-
-                itemView.setOnClickListener(this::launchCar);
+                itemView.setOnClickListener(view ->launchCar(imageView) );
         }
 
 
         private void launchCar(View view){
 
-            listener.onCarClick(car);
+            listener.onCarClick(car,view);
 
         }
 
@@ -119,7 +118,7 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 public interface CarClickListener{
 
 
-    void onCarClick(Car car);
+    void onCarClick(Car car,View view);
 }
 
 }

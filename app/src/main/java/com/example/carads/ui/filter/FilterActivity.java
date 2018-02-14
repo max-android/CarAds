@@ -28,7 +28,7 @@ private RadioButton rbCost;
 private RadioButton rbColor;
 private RadioButton rbValue;
 private RadioButton rvPower;
-//private FragmentManager manager;
+
 
     private  Intent search;
 
@@ -104,6 +104,7 @@ private RadioButton rvPower;
         rbValue.setOnClickListener(listener);
         rvPower.setOnClickListener(listener);
     }
+
 
 
     private void showSelectMarkaCar(){

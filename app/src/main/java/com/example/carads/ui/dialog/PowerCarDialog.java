@@ -85,7 +85,7 @@ public class PowerCarDialog extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
 
-            if(Integer.valueOf(toPower)>Integer.valueOf(fromPower)){
+            if(Integer.valueOf(toPower)>Integer.valueOf(fromPower)||Integer.valueOf(toPower).equals(Integer.valueOf(fromPower))){
 
                 dialogListener.onPowerSet(fromPower,toPower);
 

@@ -8,7 +8,7 @@ import com.example.carads.ui.callbacks.GetFunc;
  * Created by Максим on 14.02.2018.
  */
 
-public interface TransmitterDataForUpdIns {
+public interface TransmitterComplexDataForRequest {
 
 
     void getObj(GetFunc<AutoTransmitter> data);

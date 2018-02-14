@@ -79,12 +79,12 @@
             android:text="@string/sort_power" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/button"
-        style="@style/MyButton"
+    <!--<Button-->
+        <!--android:id="@+id/button"-->
+        <!--style="@style/MyButton"-->
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/show_ads" />
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:text="@string/show_ads" />-->
 </LinearLayout>
