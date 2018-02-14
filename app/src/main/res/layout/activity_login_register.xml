@@ -111,6 +111,7 @@ tools:context="com.example.carads.ui.registration.LoginRegisterActivity">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     style="@style/MyButton"
                     android:text="@string/action_register" />
 
@@ -138,6 +139,7 @@ tools:context="com.example.carads.ui.registration.LoginRegisterActivity">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/verify_email"
                     style="@style/MyButton"
                   />

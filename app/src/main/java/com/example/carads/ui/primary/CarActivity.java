@@ -45,9 +45,6 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
     RequestManager requestManager;
 
     @Inject
-    AppBase base;
-
-    @Inject
     FirebaseAuth firebaseAuth;
 
     @Inject

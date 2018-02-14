@@ -1,6 +1,10 @@
 package com.example.carads.presenter;
 
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.presenter.transmitters.TransmitterCleaning;
+import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
+import com.example.carads.presenter.transmitters.TransmitterParamForRequest;
+import com.example.carads.presenter.transmitters.TransmitterUnitDataFromPresenter;
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Message;
 import javax.inject.Inject;
@@ -12,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Максим on 13.02.2018.
  */
 
-public class FavoritesPresenter implements TransmitterDataForReqiest,TransmitterCleaning {
+public class FavoritesPresenter implements TransmitterParamForRequest,TransmitterCleaning {
 
 
     @Inject
@@ -41,12 +45,12 @@ public class FavoritesPresenter implements TransmitterDataForReqiest,Transmitter
     @Override
     public void getParam(GetFunc<String> data) {
 
-                     initDataFromDB(data.transferData());
+                     initData(data.transferData());
     }
 
 
 
-    private void initDataFromDB(String key){
+    private void initData(String key){
 
         subscrition.add(databaseManager.readFavoritesCarFromBD(key)
 

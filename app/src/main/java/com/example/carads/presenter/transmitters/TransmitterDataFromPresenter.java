@@ -1,4 +1,4 @@
-package com.example.carads.presenter;
+package com.example.carads.presenter.transmitters;
 
 import com.example.carads.model.storage.database.entity.Car;
 

@@ -46,9 +46,6 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
     MyFavorites myFavorites;
 
     @Inject
-    AppBase base;
-
-    @Inject
     RequestManager requestManager;
 
     @Inject
@@ -107,10 +104,6 @@ public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.
             if (!favorites.isEmpty()){
 
             showList();
-
-            DatabaseManager databaseManager = new DatabaseManager(base);
-
-            CompositeDisposable subscription = new CompositeDisposable();
 
         for (Map.Entry<String, ?> entry : favorites.entrySet()) {
 

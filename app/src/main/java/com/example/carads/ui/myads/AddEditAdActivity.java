@@ -23,7 +23,9 @@ import com.example.carads.R;
 import com.example.carads.di.App;
 import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.entity.AutoTransmitter;
 import com.example.carads.model.storage.database.entity.Car;
+import com.example.carads.presenter.AddEditAdPresenter;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.LocationPermission;
 import com.example.carads.ui.utilities.NetInspector;
@@ -48,16 +50,14 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
 
 
     @Inject
-    AppBase base;
-
-    @Inject
     FirebaseAuth firebaseAuth;
 
     @Inject
     LocationPermission locationPermission;
 
+    @Inject
+    AddEditAdPresenter addEditAdPresenter;
 
-  private DatabaseManager databaseManager;
 
 
   private TextView tvMyAuth;
@@ -100,7 +100,7 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
 
 
         initComponents();
-        initComponentsForlocating();
+        initComponentsForLocation();
         showUser(user);
         initData();
     }
@@ -142,13 +142,11 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
         tvLongitude=(TextView) findViewById(R.id. tvLongitude);
 
         //spinnerCities =(Spinner) findViewById(R.id.spinnerCities);
-
-        databaseManager=new DatabaseManager(base);
         executor= Executors.newFixedThreadPool(1);
     }
 
 
-    private void initComponentsForlocating(){
+    private void initComponentsForLocation(){
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -159,7 +157,6 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
         //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
     }
-
 
 
     private void showUser(FirebaseUser user){
@@ -224,8 +221,6 @@ private void editAd(){
     }
 
 
-
-
 private void saveData(){
 
     if(validateForm()){
@@ -246,32 +241,24 @@ private void saveData(){
 
     private void updateDataBase() {
 
+        addEditAdPresenter.getObj(()-> new AutoTransmitter(car.getId(),Constants.UPDATE_TRANSMITTER,
+                new Car(etName.getText().toString(),
+                etImage.getText().toString(),
+                etDate.getText().toString(),
+                etMileage.getText().toString(),
+                etColor.getText().toString(),
+                Integer.parseInt(etPrice.getText().toString()),
+                Double.valueOf(etValume.getText().toString()),
+                Integer.parseInt(etPower.getText().toString()),
+                etOwner.getText().toString(),
+                etPhone.getText().toString(),
+                etMail.getText().toString(),
+                etAddress.getText().toString(),
+                latitude,longitude)));
 
-        Completable.fromCallable(
-                ()->{
 
-                    databaseManager.updateCarFromBD(car.getId(),etName.getText().toString(),
-                            etImage.getText().toString(),
-                            etDate.getText().toString(),
-                            etMileage.getText().toString(),
-                            etColor.getText().toString(),
-                            Integer.parseInt(etPrice.getText().toString()),
-                            Double.valueOf(etValume.getText().toString()),
-                            Integer.parseInt(etPower.getText().toString()),
-                            etOwner.getText().toString(),
-                            etPhone.getText().toString(),
-                            etMail.getText().toString(),
-                            etAddress.getText().toString(),
-                            latitude,longitude
-                    );
-                    return null;
-                }
-
-        )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()->launchStatusUpdate(),
-                        (error)-> Toast.makeText(this,getString(R.string.error_update_ad),Toast.LENGTH_LONG).show());
+        addEditAdPresenter.setMessage(this::launchStatusUpdate);
+        addEditAdPresenter.setMistake(error ->Toast.makeText(this,error,Toast.LENGTH_LONG).show() );
 
     }
 
@@ -285,32 +272,23 @@ private void saveData(){
 
     private void insertAdIntoDataBase() {
 
-
-        Completable.fromCallable(
-                ()->{
-
-                    databaseManager.insertCarIntoBD(new Car(etName.getText().toString(),
-                            etImage.getText().toString(),
-                            etDate.getText().toString(),
-                            etMileage.getText().toString(),
-                            etColor.getText().toString(),
-                            Integer.parseInt(etPrice.getText().toString()),
-                            Double.valueOf(etValume.getText().toString()),
-                            Integer.parseInt(etPower.getText().toString()),
-                            etOwner.getText().toString(),
-                            etPhone.getText().toString(),
-                            etMail.getText().toString(),
-                            etAddress.getText().toString(),
-                            latitude,longitude
-                    ));
-                    return null;
-                }
-
-                )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()->launchStatusInsert(),
-                        (error)-> Toast.makeText(this,getString(R.string.error_insert_ad),Toast.LENGTH_LONG).show());
+        addEditAdPresenter.getObj(()-> new AutoTransmitter(Constants.ID_DEFAULT,Constants.INSERT_TRANSMITTER,new Car(
+                etName.getText().toString(),
+                etImage.getText().toString(),
+                etDate.getText().toString(),
+                etMileage.getText().toString(),
+                etColor.getText().toString(),
+                Integer.parseInt(etPrice.getText().toString()),
+                Double.valueOf(etValume.getText().toString()),
+                Integer.parseInt(etPower.getText().toString()),
+                etOwner.getText().toString(),
+                etPhone.getText().toString(),
+                etMail.getText().toString(),
+                etAddress.getText().toString(),
+                latitude,longitude
+        )));
+        addEditAdPresenter.setMessage(this::launchStatusInsert);
+        addEditAdPresenter.setMistake(error -> Toast.makeText(this,error,Toast.LENGTH_LONG).show());
 
     }
 
@@ -387,9 +365,6 @@ private void saveData(){
     }
 
 
-
-
-
     @Override
     public void onConnectionSuspended(int i) {
         Log.i("ConnectionSuspended", "Connection Suspended");
@@ -407,13 +382,11 @@ private void saveData(){
 
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
         googleApiClient.connect();
     }
-
 
     @Override
     public void onStop() {
@@ -423,10 +396,12 @@ private void saveData(){
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-
-
-
+        addEditAdPresenter.dismissalResource();
+    }
 
     private boolean validateForm() {
 

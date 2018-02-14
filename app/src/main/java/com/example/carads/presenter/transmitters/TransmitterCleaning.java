@@ -1,4 +1,4 @@
-package com.example.carads.presenter;
+package com.example.carads.presenter.transmitters;
 
 /**
  * Created by Максим on 13.02.2018.

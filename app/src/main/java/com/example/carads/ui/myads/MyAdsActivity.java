@@ -16,9 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.di.App;
-import com.example.carads.model.storage.database.AppBase;
-import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.Car;
+import com.example.carads.presenter.MyAdsPresenter;
 import com.example.carads.ui.search.AvtoAdapter;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Dialog;
@@ -34,15 +33,8 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-
 public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarClickListener  {
 
-    @Inject
-    AppBase base;
 
     @Inject
     FirebaseAuth firebaseAuth;
@@ -50,17 +42,16 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
     @Inject
     RequestManager requestManager;
 
+    @Inject
+    MyAdsPresenter myAdsPresenter;
 
     private TextView tvMyMail;
     private TextView tvInfo;
-
     private FirebaseUser user;
-    private CompositeDisposable subscription;
-
     private RecyclerView recyclerMyAdds;
     private AvtoAdapter avtoAdapter;
     private List<Car> carsMyAdds;
-    private  DatabaseManager databaseManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +60,6 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
 
         initComponents();
 
-       // showUser(user);
-
-       // showUserAds();
     }
 
 
@@ -79,21 +67,17 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
     protected void onStart() {
 
         App.getAppComponent().injectMyAdsActivity(this);
+
         user = firebaseAuth.getCurrentUser();
 
         showUser(user);
 
         carsMyAdds=new ArrayList<>();
-        databaseManager = new DatabaseManager(base);
-
-        subscription = new CompositeDisposable();
 
         showUserAds();
 
         super.onStart();
-
     }
-
 
     private void initComponents() {
 
@@ -113,10 +97,6 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
       //  user = firebaseAuth.getCurrentUser();
 
-//        databaseManager = new DatabaseManager(base);
-//
-//        subscription = new CompositeDisposable();
-
     }
 
 
@@ -134,7 +114,6 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
     }
 
 
-
     private void showUser(FirebaseUser user){
         if(user!=null){
 
@@ -144,17 +123,11 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
     }
 
 
-
-
     private void showUserAds(){
 
-        subscription.add(databaseManager.readMyAdFromBD(user.getEmail())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(cars ->launchDataInto(cars) ,
-                        (error)-> Toast.makeText(this,getString(R.string.user_not_exist_ads),Toast.LENGTH_LONG).show())
-        );
-
+        myAdsPresenter.getParam(()->user.getEmail());
+        myAdsPresenter.setTransmitter(cars ->launchDataInto(cars));
+        myAdsPresenter.setMistake(error->Toast.makeText(this,error,Toast.LENGTH_LONG).show());
 
     }
 
@@ -207,39 +180,17 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
 
         avtoAdapter.notifyDataSetChanged();
 
+        myAdsPresenter.getObj(()->car);
+        myAdsPresenter.setMessage(this::launchStatusDelete);
+        myAdsPresenter.setMistake(error -> Toast.makeText(this,error,Toast.LENGTH_LONG).show());
 
-        Completable.fromCallable(
-                ()->{
-
-                   databaseManager.deleteCarFromBD(car);
-                    return null;
-                }
-
-        ).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()->launchStatusDelete(),
-                        (error)-> Toast.makeText(this,getString(R.string.error_delete_ad),Toast.LENGTH_LONG).show());
-
-
-//       Executor executor= Executors.newFixedThreadPool(1);
-//        executor.execute(()->{
-//
-//            int integer = databaseManager.deleteCarFromBD(car);
-//
-//            runOnUiThread(()->launchStatusDelete(integer));
-//
-//        });
     }
-
 
     private void editMyAdd(Car car){
 
         //запуск активити для добавления - там изменяем
-
         launchEditActivity(car);
-
     }
-
 
     private void launchStatusDelete(){
 
@@ -266,13 +217,12 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
 
     @Override
     protected void onStop() {
-        subscription.clear();
+       myAdsPresenter.dismissalResource();
         super.onStop();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-      //  subscription.clear();
-    }
+
+
+
+
 }

@@ -2,7 +2,9 @@ package com.example.carads.di;
 
 import com.example.carads.model.service.CarsService;
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.presenter.AddEditAdPresenter;
 import com.example.carads.presenter.FavoritesPresenter;
+import com.example.carads.presenter.MyAdsPresenter;
 import com.example.carads.presenter.PrimaryPresenter;
 
 import javax.inject.Singleton;
@@ -34,6 +36,21 @@ public class PresenterModule {
 
         return new FavoritesPresenter(databaseManager);
     }
+
+    @Provides
+    @Singleton
+    public MyAdsPresenter provideMyAdsPresenter (DatabaseManager databaseManager){
+
+        return new MyAdsPresenter (databaseManager);
+    }
+
+    @Provides
+    @Singleton
+    public AddEditAdPresenter provideAddEditAdPresenter(DatabaseManager databaseManager){
+
+        return new AddEditAdPresenter(databaseManager);
+    }
+
 
 
 }

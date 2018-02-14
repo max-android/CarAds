@@ -130,6 +130,14 @@ public class Constants {
     public static final String OFFICIAL_MAIL= "servicecarads_officialmail@mail";
 
 
+    public static final String DELETE_MY_AD = "delete_my_ad";
+
+
+    public static final String UPDATE_TRANSMITTER = "update_transmitter";
+    public static final String INSERT_TRANSMITTER = "insert_transmitter";
+    public static final int ID_DEFAULT = 0;
+
+
 
 
 

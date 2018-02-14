@@ -1,12 +1,12 @@
 package com.example.carads.presenter;
 
-import android.util.Log;
-
-import com.example.carads.model.service.CarsService;
 import com.example.carads.model.storage.database.DatabaseManager;
+import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.presenter.transmitters.TransmitterCleaning;
+import com.example.carads.presenter.transmitters.TransmitterDataForDelete;
 import com.example.carads.presenter.transmitters.TransmitterDataFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
+import com.example.carads.presenter.transmitters.TransmitterMessageFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterParamForRequest;
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Message;
@@ -19,26 +19,23 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Максим on 13.02.2018.
+ * Created by Максим on 14.02.2018.
  */
 
-public class PrimaryPresenter implements TransmitterParamForRequest,TransmitterCleaning {
+public class MyAdsPresenter implements TransmitterParamForRequest,TransmitterCleaning,TransmitterDataForDelete {
 
 
     @Inject
     DatabaseManager databaseManager;
 
-    @Inject
-    CarsService service;
-
     private TransmitterDataFromPresenter transmitter;
     private TransmitterErrorFromPresenter mistake;
+    private TransmitterMessageFromPresenter message;
 
     private CompositeDisposable subscrition = new CompositeDisposable();
 
 
-    public PrimaryPresenter(CarsService service,DatabaseManager databaseManager) {
-        this.service=service;
+    public MyAdsPresenter (DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
     }
 
@@ -46,64 +43,64 @@ public class PrimaryPresenter implements TransmitterParamForRequest,TransmitterC
         this.transmitter = transmitter;
     }
 
+    public void setMessage(TransmitterMessageFromPresenter message) {
+        this.message = message;
+    }
+
     public void setMistake(TransmitterErrorFromPresenter mistake) {
         this.mistake = mistake;
     }
 
+
     @Override
     public void getParam(GetFunc<String> data) {
 
-        checkAvailabilityDB();
+          initData(data.transferData());
 
     }
 
 
+    private void initData(String type){
 
-
-    private void checkAvailabilityDB(){
-
-        subscrition.add(databaseManager.readSizeFromBD()
+        subscrition.add(databaseManager.readMyAdFromBD(type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integer -> initData(integer)
-                        ,error -> mistake.showError(Message.WRITE_DB_ERROR)));
+                .subscribe(cars ->transmitter.showCars(cars) ,
+                        error-> mistake.showError(Message.USER_NOT_EXIST_ADS))
+        );
     }
 
 
-    private void initData(int size){
-        if(size==0){
-            insertDataIntoStorage();}else{
-            initDataFromStorage();}
+    @Override
+    public void getObj(GetFunc<Car> data) {
+
+        updateData(data.transferData());
+
     }
 
 
-    private void initDataFromStorage(){
-
-        subscrition.add(databaseManager.readAllDataFromBD()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(list -> transmitter.showCars(list)
-                        ,error -> mistake.showError(Message.WRITE_DB_ERROR)));
-    }
-
-    private void insertDataIntoStorage(){
+    private void updateData(Car car){
 
         Completable.fromCallable(
                 ()->{
-                    databaseManager.writeDataIntoBD(service.getCars());
+
+                    databaseManager.deleteCarFromBD(car);
+
                     return null;
                 }
         ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()-> Log.d("successfully", Message.WRITE_DB_SUCCESSFULLY),
-                        error-> mistake.showError(Message.WRITE_DB_ERROR));
-
-        transmitter.showCars(service.getCars());
+                .subscribe(()->message.action(),
+                        (error)-> mistake.showError(Message.ERROR_DELETE_AD));
     }
+
 
 
     @Override
     public void dismissalResource() {
         subscrition.clear();
     }
+
+
+
 }
