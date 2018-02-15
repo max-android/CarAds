@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,8 +18,6 @@ import android.widget.Toast;
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.di.App;
-import com.example.carads.model.storage.database.AppBase;
-import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.model.storage.favorites.MyFavorites;
 import com.example.carads.presenter.FavoritesPresenter;
@@ -30,7 +27,6 @@ import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Dialog;
 import com.example.carads.ui.utilities.Notification;
 import com.example.carads.ui.utilities.Picture;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -39,9 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+
 
 public class FavoritesActivity extends AppCompatActivity implements AvtoAdapter.CarClickListener {
 
@@ -161,7 +155,7 @@ new Thread(()->{
 
     try {
         Drawable drawable  = new Picture().drawableFromUrl(car.getImage());
-       // Drawable drawable  = drawableFromUrl(car.getImage());
+
         runOnUiThread(()->showDialog(drawable,car,view));
 
     } catch (Exception e) {
@@ -216,40 +210,6 @@ Intent detailIntent = new Intent(this, DetailActivity.class);
 
 
 
-                //загрузка картинки в диалоговое окно
-    public Drawable drawableFromUrl(String url)throws Exception{
-
-            HttpURLConnection connection=(HttpURLConnection) createURL(url).openConnection();
-            connection.connect();
-
-            int response = connection.getResponseCode();
-
-        Drawable drawable=null;
-
-            if(response==HttpURLConnection.HTTP_OK){
-                InputStream input = connection.getInputStream();
-                drawable = Drawable.createFromStream(input,Constants.DIALOG_IMAGE);
-                input.close();
-            }
-
-            connection.disconnect();
-            return drawable;
-    }
-
-
-    private URL createURL(String uri){
-
-        URL url= null;
-        try {
-            url = new URL(uri);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        return url;
-    }
-
-
     //2 способ
 //    public void  drawableFromUrl2(String url, SetFunc<Drawable> setFunc)  {
 //
@@ -277,8 +237,6 @@ Intent detailIntent = new Intent(this, DetailActivity.class);
 //
 //        } ).start();
 //    }
-
-
 
 
 }

@@ -30,7 +30,6 @@ import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.setting.SettingsActivity;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.R;
-import com.example.carads.model.storage.database.AppBase;
 import com.example.carads.di.App;
 import com.example.carads.ui.utilities.Message;
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,14 +97,9 @@ public class CarActivity extends AppCompatActivity implements NavigationView.OnN
      searchView = (SearchView) findViewById(R.id.searchView);
      searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
      searchView.setQueryHint(Constants.SEARCH_HINT);
-    // searchView.setIconifiedByDefault(false);
-    // searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-     //searchView.setMaxWidth(getResources().getDimension(R.dimen.));
-     //searchView.clearFocus();
 
      searchView.setOnQueryTextListener(queryTextListener);
 
-   //  currentUser=firebaseAuth.getCurrentUser();
  }
 
 
@@ -236,13 +230,6 @@ private void navigationBackPressed(){
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.car_menu, menu);
-
-        //под вопросом ипользования
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-//
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
         return true;
     }

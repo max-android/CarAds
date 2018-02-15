@@ -18,40 +18,30 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
-import com.example.carads.model.storage.database.AppBase;
-import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.AutoTransmitter;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.di.App;
 import com.example.carads.presenter.SearchablePresenter;
 import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.utilities.Constants;
-
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
-
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
 
 public class SearchableActivity extends AppCompatActivity implements AvtoAdapter.CarClickListener {
-
 
 
     @Inject
     SearchablePresenter searchablePresenter;
 
-
-    private RecyclerView carsRecycler;
-    private ProgressBar progressBar;
-
-
     @Inject
     RequestManager requestManager;
 
+    private RecyclerView carsRecycler;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -75,18 +65,14 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
         LinearLayoutManager mLayoutManager=new LinearLayoutManager(this);
         carsRecycler.setLayoutManager(mLayoutManager);
         carsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        //carsRecycler.addOnScrollListener(scrollListener);
+
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
-       // progressBar.setVisibility(View.VISIBLE);
 
        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbarListCars);
-      //  setSupportActionBar(toolbar);
-      //  getSupportActionBar().setTitle(R.string.empty_body);
+
         toolbar.setTitle(R.string.result_search);
-//        toolbar.setSubtitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCarsLocation);
         fab.setOnClickListener(floating ->{     } );
@@ -157,7 +143,6 @@ public class SearchableActivity extends AppCompatActivity implements AvtoAdapter
             }
 
         });
-
 
     }
 

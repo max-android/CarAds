@@ -29,7 +29,6 @@ public class DetailSettingsActivity extends AppCompatActivity {
      toolbar=(Toolbar)findViewById(R.id.tbDetSettings);
       setSupportActionBar(toolbar);
       getSupportActionBar().setTitle(getString(R.string.empty_body));
-      //toolbar.setNavigationIcon(R.mipmap.exit);
       toolbar.setNavigationIcon(R.drawable.ic_exit_24dp);
       toolbar.setNavigationOnClickListener(exit -> finish());
   }

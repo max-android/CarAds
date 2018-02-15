@@ -22,36 +22,11 @@ import io.reactivex.Single;
 public interface CarDao {
 
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    void insertCar(List<Car> cars);
-
-
-   // void insertFilms(List<Film> cars);
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCars(List<Car> cars);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
    void insertCar(Car car);
-
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    Callable<Long> insertCar(Car car);
-
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    Single<Long> insertCars(List<Car> cars);
-//
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    Single<Long> insertCar(Car car);
-
-//    @Query("SELECT * FROM films")
-//    public List<Film> getAllFilmsDB();
-
-
-//    @Query("SELECT * FROM films")
-//    Maybe<List<Film>> getAllFilmsDB();
-
 
 
     @Query("SELECT * FROM car")
@@ -64,15 +39,9 @@ public interface CarDao {
     @Query("SELECT COUNT(*) FROM car")
     Single<Integer> getSizeDB();
 
-   // @Query("DELETE car WHERE mail = :email")
-//    void deleteCarFromDB(String email);
 
     @Delete
     int deleteCar(Car car);
-
-
-//    @Query("DELETE from car WHERE mail = :email")
-//    int deleteCarByParameter(String email);
 
 
     @Query("SELECT * FROM car WHERE date_issue BETWEEN :from_date AND :to_date ORDER BY date_issue ASC")
@@ -134,31 +103,5 @@ public interface CarDao {
                         double new_latitude,
                         double new_longitude
     );
-
-
-
-
-
-//    @Query("UPDATE weekly SET date = :new_date," +
-//            "businessHoro = :new_businessHoro," +
-//            "commonHoro = :new_commonHoro," +
-//            "loveHoro = :new_loveHoro," +
-//            "healthHoro = :new_healthHoro," +
-//            "carHoro = :new_carHoro," +
-//            "beautyHoro = :new_beautyHoro," +
-//            "eroticHoro = :new_eroticHoro," +
-//            "goldHoro = :new_goldHoro WHERE typeWeek = :type and zodiac = :znac")
-//    void updateWeeklyDB(String type, String znac,
-//                        String new_date,
-//                        String new_businessHoro,
-//                        String new_commonHoro,
-//                        String new_loveHoro,
-//                        String new_healthHoro,
-//                        String new_carHoro,
-//                        String new_beautyHoro,
-//                        String new_eroticHoro,
-//                        String new_goldHoro
-//    );
-
 
 }

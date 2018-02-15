@@ -6,11 +6,9 @@ import com.example.carads.presenter.transmitters.TransmitterCleaning;
 import com.example.carads.presenter.transmitters.TransmitterComplexDataForRequest;
 import com.example.carads.presenter.transmitters.TransmitterDataFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
-import com.example.carads.presenter.transmitters.TransmitterMessageFromPresenter;
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Constants;
 import javax.inject.Inject;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;

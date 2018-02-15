@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
@@ -63,16 +62,12 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Log.d("LIFESTYLE","onCreate");
-
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
-        Log.d("LIFESTYLE","onCreateView");
         return inflater.inflate(R.layout.fragment_detail,container,false);
     }
 
@@ -84,7 +79,6 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
 
         initComponentsWithData(view);
 
-        Log.d("LIFESTYLE","onViewCreated");
     }
 
 
@@ -104,10 +98,6 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
         Toolbar toolbar = (Toolbar)view.findViewById(R.id.tbDetail);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
-       // toolbar.setTitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
-
-       // toolbar.setTitle(car.getName());
 
         appBarLayout=(AppBarLayout)view.findViewById(R.id.appBar);
 
@@ -185,7 +175,7 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-       // ((DetailActivity)getActivity()).getMenuInflater().inflate(R.menu.menu_share,menu);
+
            inflater.inflate(R.menu.menu_share,menu);
         item =  menu.findItem(R.id.favorite);
     }
@@ -195,8 +185,6 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
         super.onPrepareOptionsMenu(menu);
         appBarLayout.addOnOffsetChangedListener(this);
     }
-
-
 
 
     @Override
@@ -234,14 +222,9 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
             Map<String, ?> favorites = myFavorites.getKeysFavorites();
 
             for(Map.Entry<String, ?> entry : favorites.entrySet()){
-
                 Log.d("TAG",entry.getKey()+"------"+entry.getValue());
-
             }
-
-
         }
-
     }
 
 
@@ -273,7 +256,6 @@ public class DetailFragment extends Fragment implements AppBarLayout.OnOffsetCha
         super.onDestroy();
         appBarLayout.removeOnOffsetChangedListener(this);
     }
-
 
 
     @Override

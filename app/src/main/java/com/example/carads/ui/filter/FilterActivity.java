@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
-
 import com.example.carads.R;
 import com.example.carads.ui.dialog.ColorCarDialog;
 import com.example.carads.ui.dialog.DateIssueCarDialog;
@@ -41,9 +40,7 @@ private RadioButton rvPower;
         initComponent();
 
         choiceFilter();
-
     }
-
 
     private void initComponent(){
 
@@ -56,11 +53,9 @@ private RadioButton rvPower;
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbarFilter);
         toolbar.setTitle(R.string.select_filter);
-//        toolbar.setSubtitleTextColor(ContextCompat.getColor(this,R.color.colorWhite));
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
     }
-
 
 
     private void choiceFilter() {
@@ -70,9 +65,7 @@ private RadioButton rvPower;
             switch (v.getId()) {
 
                 case R.id.rbMarka:
-
                     showSelectMarkaCar();
-
                     break;
 
                 case R.id.rbDate:
@@ -80,20 +73,20 @@ private RadioButton rvPower;
                     break;
 
                 case R.id.rbCost:
-
                     showChosenCarsByPrice();
-
                     break;
+
                 case R.id.rbColor:
                     showChosenCarsByColor();
                     break;
+
                 case R.id.rbValue:
                     showChosenCarsByValue();
                     break;
+
                 case R.id.rvPower:
                     showChosenCarsByPower();
                     break;
-
             }
         });
 

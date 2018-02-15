@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.carads.R;
 import com.example.carads.ui.primary.CarActivity;
 import com.example.carads.ui.utilities.NetInspector;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class SplashActivity extends AppCompatActivity {

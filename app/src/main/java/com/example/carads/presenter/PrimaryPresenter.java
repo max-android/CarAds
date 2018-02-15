@@ -1,7 +1,6 @@
 package com.example.carads.presenter;
 
 import android.util.Log;
-
 import com.example.carads.model.service.CarsService;
 import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.presenter.transmitters.TransmitterCleaning;
@@ -10,9 +9,7 @@ import com.example.carads.presenter.transmitters.TransmitterErrorFromPresenter;
 import com.example.carads.presenter.transmitters.TransmitterParamForRequest;
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Message;
-
 import javax.inject.Inject;
-
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

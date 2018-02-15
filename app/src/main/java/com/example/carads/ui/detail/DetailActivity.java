@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
@@ -125,7 +124,6 @@ private void launchAdFromFavorites(){
         Menu menu = navigation.getMenu();
         menu.getItem(0).setChecked(true);
         menu.getItem(0).setCheckable(true);
-        //menu.getItem(0).setEnabled(true);
 
     }
 
@@ -146,10 +144,5 @@ private void launchAdFromFavorites(){
         mapFragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.frame,mapFragment).commitAllowingStateLoss();
     }
-
-
-
-
-
 
 }

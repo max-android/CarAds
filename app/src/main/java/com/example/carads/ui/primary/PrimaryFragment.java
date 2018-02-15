@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.carads.R;
 import com.example.carads.di.App;
 import com.example.carads.model.storage.database.entity.Car;
@@ -19,9 +18,7 @@ import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.utilities.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 
@@ -70,11 +67,9 @@ public class PrimaryFragment extends Fragment {
         App.getAppComponent().injectPrimaryFragment(this);
         currentUser = mAuth.getCurrentUser();
 
-
         Button showAds = (Button)view.findViewById(R.id.showAdsBtn);
         Button registr = (Button)view.findViewById(R.id.registrBtn);
         tvZaregistr = (TextView)view.findViewById(R.id.tvZaregistr);
-
 
         showAds.setOnClickListener(this::setListener);
         registr.setOnClickListener(this::setListener);
@@ -88,19 +83,15 @@ public class PrimaryFragment extends Fragment {
         switch (v.getId()) {
 
             case R.id.showAdsBtn:
-
                 showAds();
-
                 break;
+
             case R.id.registrBtn:
-
                 launchLoginOrRegistration();
-
                 break;
+
             case R.id.tvZaregistr:
-
                 launchLoginOrRegistration();
-
                 break;
     }
     }

@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.di.App;
@@ -35,17 +34,11 @@ public class SaveFragment extends Fragment {
     @Inject
     RequestManager requestManager;
 
-
     @Inject
     FileManager fileManager;
 
-
-    //FileManager fileManager;
-
-
     @Inject
     WritePermission writePermission;
-
 
     private Car car;
     private  ImageView imageView;
@@ -58,7 +51,6 @@ public class SaveFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
         return inflater.inflate(R.layout.fragment_save,container,false);
     }
@@ -85,14 +77,9 @@ public class SaveFragment extends Fragment {
         Toolbar toolbar = (Toolbar)view.findViewById(R.id.toolbarSave);
 
        // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
        // toolbar.setSubtitleTextColor(ContextCompat.getColor(getContext(),R.color.colorWhite));
         toolbar.setTitle(car.getName());
 
-
-        //toolbar.setTitle(car.getName());
-
-      //  notification = new Notification(view.findViewById(R.id.scrollSave),getContext());
         notification = new Notification(view.findViewById(R.id.linSave),getContext());
 
          imageView=(ImageView)view.findViewById(R.id.car_save);
@@ -105,8 +92,6 @@ public class SaveFragment extends Fragment {
         saveOnPictures.setOnClickListener(view1 -> saveIntoPictures() );
         saveOnSDCARD.setOnClickListener(view2 -> saveIntoSDCARD() );
         saveOnInternal.setOnClickListener(view3 -> saveIntoApplication());
-
-       // fileManager=new FileManager(getContext());
     }
 
 
@@ -122,32 +107,14 @@ public class SaveFragment extends Fragment {
                     //срабатывает только один раз при получении разрешения,потом вызывается внутри saveImage()
                     notification.showMessage(getString(R.string.permission_write_granted));
 
-                  //  savePictures();
-
                 } else {
 
-                    //расширенный вариант для обязательного получения разрешения к хранилищу + добавлен метод
-                    //onActivityResult для возвращения в приложения после включения настроек
-//                    if (ActivityCompat.shouldShowRequestPermissionRationale(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//
-//                        notification.showMessage(getResources().getString(R.string.permission_denied));
-//
-//                    } else {
-//
-//                        notification.showMessageWithAction(getString(R.string.message_setting), this::openApplicationSettings);
-
-                    //простой вариант вариант без обязательного получения разрешения к хранилищу+убрать onActivityResult
-                    //в данном случае пользователь постоянно будет получать такое сообщение и будет пользоваться приложением
-                    //с ограниченными возможностями (без записи) или польхователь сам может найти настройки для доступа
-                    //к хранилищу  для приложения
                     notification.showMessage(getString(R.string.permission_write_denied));
 
                 }
                 break;
         }
     }
-
-
 
 
     private Bitmap convertImageIntoBitmap(){
@@ -175,7 +142,6 @@ public class SaveFragment extends Fragment {
 
 private void saveIntoPictures(){
         //проверка на доступ
-
     writePermission.requestPermission(getContext(),this::savePictures);
 
 }
@@ -208,9 +174,6 @@ private void saveAllData(){
     correctionImageLocation();
 }
 
-
-
-
 private void saveIntoApplication(){
 
     bitmap=convertImageIntoBitmap();
@@ -218,7 +181,5 @@ private void saveIntoApplication(){
 
     correctionImageLocation();
 }
-
-
 
 }

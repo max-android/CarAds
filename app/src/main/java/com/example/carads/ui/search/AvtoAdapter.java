@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
-
-
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +34,6 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 
         View view=inflater.inflate(R.layout.avto_item,parent,false);
 
-       // return  new ViewHolder(view,listener);
         return  new ViewHolder(view);
     }
 
@@ -82,7 +78,7 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 
         private Car car;
 
-       // public ViewHolder(View itemView,final CarClickListener listener) {
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -116,8 +112,6 @@ public class AvtoAdapter extends RecyclerView.Adapter<AvtoAdapter.ViewHolder> {
 
 
 public interface CarClickListener{
-
-
     void onCarClick(Car car,View view);
 }
 

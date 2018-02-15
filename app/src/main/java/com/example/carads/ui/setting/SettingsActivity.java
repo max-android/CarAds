@@ -24,13 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
     private void initComponents(){
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.tbSetting);
-        //setSupportActionBar(toolbar);
-       // toolbar.setSubtitle(R.string.setting);
         toolbar.setTitle(R.string.setting);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
-
-
 
         TextView tvHelp=(TextView)findViewById(R.id.tvHelp);
         TextView tvAppInfo=(TextView)findViewById(R.id.tvAppInfo);

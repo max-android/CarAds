@@ -18,11 +18,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.carads.R;
 import com.example.carads.di.App;
-import com.example.carads.model.storage.database.AppBase;
-import com.example.carads.model.storage.database.DatabaseManager;
 import com.example.carads.model.storage.database.entity.AutoTransmitter;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.presenter.AddEditAdPresenter;
@@ -35,16 +32,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import javax.inject.Inject;
-
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class AddEditAdActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
@@ -59,10 +50,8 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
     AddEditAdPresenter addEditAdPresenter;
 
 
-
-  private TextView tvMyAuth;
+    private TextView tvMyAuth;
     private FirebaseUser user;
-
     private EditText etName;
     private EditText etImage;
     private EditText  etDate;
@@ -77,19 +66,13 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
     private EditText  etAddress;
     private TextView tvLatitude;
     private TextView tvLongitude;
-
     private boolean edit=true;
-
     private   Executor executor;
     private double latitude;
     private double longitude;
 
-    private  CompositeDisposable subscription;
-
     private GoogleApiClient googleApiClient;
     private Location mLocation;
-    private LocationManager locationManager;
-//    private LocationRequest mLocationRequest;
     private Toolbar toolbar;
     private Car car;
 
@@ -97,7 +80,6 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_ad);
-
 
         initComponents();
         initComponentsForLocation();
@@ -112,12 +94,8 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
 
         user = firebaseAuth.getCurrentUser();
          toolbar = (Toolbar) findViewById(R.id.tbAddEditAd);
-
-        //setSupportActionBar(toolbar);
-
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAddEditAd);
 
@@ -137,11 +115,8 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
         etPhone=((TextInputLayout)findViewById(R.id.til_phone)).getEditText();
         etMail=((TextInputLayout)findViewById(R.id.til_mail)).getEditText();
         etAddress=((TextInputLayout)findViewById(R.id.til_address)).getEditText();
-
         tvLatitude=(TextView) findViewById(R.id.tvLatitude);
         tvLongitude=(TextView) findViewById(R.id. tvLongitude);
-
-        //spinnerCities =(Spinner) findViewById(R.id.spinnerCities);
         executor= Executors.newFixedThreadPool(1);
     }
 
@@ -153,15 +128,11 @@ public class AddEditAdActivity extends AppCompatActivity implements GoogleApiCli
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
     }
 
 
     private void showUser(FirebaseUser user){
         if(user!=null){
-
             tvMyAuth.setText(getString(R.string.emailpassword_status_fmt,
                     user.getEmail(),user.isEmailVerified()));
         }
@@ -175,9 +146,7 @@ private  void initData(){
     switch (select.getType()){
 
         case Constants.TYPE_ADD_AD:
-
             instruct();
-
             break;
 
         case Constants.TYPE_EDIT_AD:
@@ -214,9 +183,7 @@ private void editAd(){
     
     private void instruct(){
         edit=false;
-
         toolbar.setTitle(R.string.add_ads);
-
         showMessage(R.string.not_filled);
     }
 
@@ -263,12 +230,9 @@ private void saveData(){
     }
 
     private void launchStatusUpdate(){
-
         showMessage(R.string.update_ad);
-
         onBackPressed();
     }
-
 
     private void insertAdIntoDataBase() {
 
@@ -294,16 +258,12 @@ private void saveData(){
 
 
     private void launchStatusInsert() {
-
         showMessage(R.string.insert_ad);
-
         onBackPressed();
     }
 
     private void showMessage(int message){
-
     Notification notification=new Notification(findViewById(R.id.coordAddEditAd),this);
-
     notification.showMessage(getString(message));
 }
 
@@ -316,17 +276,9 @@ private void saveData(){
             case Constants.LOCATION_PERMISSION_REQUEST_CODE:
                 if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED&& grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-                    //срабатывает только один раз при получении разрешения
-
                     showMessage(R.string.permission_location_granted);
 
-
                 } else {
-
-                    //простой вариант вариант без обязательного получения разрешения к хранилищу+убрать onActivityResult
-                    //в данном случае пользователь постоянно будет получать такое сообщение и будет пользоваться приложением
-                    //с ограниченными возможностями (без записи) или польхователь сам может найти настройки для доступа
-                    //к хранилищу  для приложения
                     showMessage(R.string.permission_location_denied);
                     onBackPressed();
                 }
@@ -357,9 +309,7 @@ private void saveData(){
              tvLongitude.setText(String.valueOf(longitude));
 
         }else{
-
             showMessage(R.string.turn_on_location);
-
         }
 
     }
@@ -379,7 +329,6 @@ private void saveData(){
 
     @Override
     public void onLocationChanged(Location location) {
-
     }
 
     @Override
@@ -399,7 +348,6 @@ private void saveData(){
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         addEditAdPresenter.dismissalResource();
     }
 

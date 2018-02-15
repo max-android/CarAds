@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
@@ -68,8 +67,6 @@ private void showCarOnMap(GoogleMap googleMap){
 
     new Picture().bitmapFromUrl2(car.getImage(), result ->{
 
-
-
         if(car.getLatitude()==0.0){ showMessage();}else{
 
             LatLng sydney = new LatLng(car.getLatitude(), car.getLongitude());
@@ -87,9 +84,7 @@ private void showCarOnMap(GoogleMap googleMap){
 }
 
 private void showMessage(){
-
     Toast.makeText(getContext(),R.string.no_coord,Toast.LENGTH_LONG).show();
-
 
 }
 

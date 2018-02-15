@@ -26,7 +26,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private TextView tvStatus;
     private EditText email;
     private EditText password;
-    //private FirebaseAuth mAuth;
+
     private ProgressManager dialogProgress;
 
     @Inject
@@ -39,14 +39,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
 
         initComponents();
-       // initFirebase();
+
 
     }
 
-//    private void initFirebase(){
-//
-//        mAuth = FirebaseAuth.getInstance();
-//    }
 
     private void initComponents() {
 
@@ -93,7 +89,6 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 break;
         }
     }
-
 
 
     @Override

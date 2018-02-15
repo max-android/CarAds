@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.carads.R;
 import com.example.carads.ui.utilities.Constants;
 
@@ -22,7 +21,6 @@ public class ColorCarDialog extends DialogFragment {
 
 
     private  ColorCarDialogListener dialogListener;
-    //private String color;
 
     private Button btnOrange;
     private Button btnBrown;
@@ -53,7 +51,6 @@ public class ColorCarDialog extends DialogFragment {
 
         builder.setTitle(Constants.SEARCH_COLOR);
         builder.setNegativeButton(Constants.CANCEL,negativListener);
-      //  builder.setPositiveButton(Constants.OK,positivListener);
 
         return builder.create();
     }
@@ -144,16 +141,6 @@ private void choiceColorAuto(){
 
         }
     };
-
-
-//    private final DialogInterface.OnClickListener positivListener=new DialogInterface.OnClickListener() {
-//        @Override
-//        public void onClick(DialogInterface dialogInterface, int i) {
-//
-//            dialogListener.onColorSet(color);
-//
-//        }
-//    };
 
 
     @Override

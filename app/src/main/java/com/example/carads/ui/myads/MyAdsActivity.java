@@ -59,7 +59,7 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ads);
 
-        initComponents();
+        initComponentsCreate();
 
     }
 
@@ -80,9 +80,7 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
         super.onStart();
     }
 
-    private void initComponents() {
-
-       // App.getAppComponent().injectMyAdsActivity(this);
+    private void initComponentsCreate() {
 
         tvMyMail = (TextView)findViewById(R.id.tvMyMail);
         tvInfo =  (TextView)findViewById(R.id.tvInfoMyAds);
@@ -91,14 +89,16 @@ public class MyAdsActivity extends AppCompatActivity implements AvtoAdapter.CarC
         recyclerMyAdds.setLayoutManager(mLayoutManager);
         recyclerMyAdds.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarMyAds);
         toolbar.setTitle(R.string.my_adds_label);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_arrow_back_24dp));
         toolbar.setNavigationOnClickListener(exit -> onBackPressed());
-      //  user = firebaseAuth.getCurrentUser();
 
     }
+
+
+
+
 
 
     private void showList(){

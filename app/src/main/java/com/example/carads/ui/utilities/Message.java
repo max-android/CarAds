@@ -1,8 +1,6 @@
 package com.example.carads.ui.utilities;
 
-import android.widget.Toast;
 
-import com.example.carads.R;
 
 /**
  * Created by Максим on 13.02.2018.
@@ -27,11 +25,6 @@ public class Message {
 
 
     public static final String ERROR_INSET_AD = "Ошибка добавления объявления, попробуйте снова";
-
-
-
-
-
 
 
 }

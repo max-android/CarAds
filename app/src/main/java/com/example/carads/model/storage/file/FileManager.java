@@ -8,12 +8,9 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
-
-
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
 import com.example.carads.ui.utilities.Constants;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -65,7 +62,7 @@ public class FileManager {
                 } catch (IOException e) {
                     e.printStackTrace();
                      handler.post(()->showMessage(context.getString(R.string.save_error_data)));
-                  //  handler.post(() -> showMessage(context.getString(R.string.save_error_data) + "IOException"));
+
                 }
 
                 handler.post(() -> showMessage(context.getString(R.string.image_save_successful) + " " + file.getAbsolutePath()));
@@ -112,16 +109,14 @@ public class FileManager {
                 handler.post(()->{ showMessage(context.getString(R.string.save_error_data)); });
             }
 
-           // PrintWriter printWriter = new PrintWriter(new FileWriter());
 
                        String file_name = createNameFile(car,Constants.FORMAT_TXT);
 
-             //  try(BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(car.getName() + System.currentTimeMillis() + Constants.FORMAT_TXT, Context.MODE_PRIVATE)))) {
+
                try(BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(file_name, Context.MODE_PRIVATE)))) {
                    for (String info : createInfoForFile(car)) {
                        bufferedWriter.write(info);
                    }
-                 //  bufferedWriter.close();
 
                    File directory = context.getDir(file_name, Context.MODE_PRIVATE);
                    Log.d("----INTERNAL----",directory.getAbsolutePath());
@@ -171,11 +166,6 @@ public class FileManager {
                     }
 
                     handler.post(() -> showMessage(context.getString(R.string.data_save_successful) + " " + file.getAbsolutePath()));
-
-             //   } else {
-                    //handler.post(()-> showMessage(context.getString(R.string.save_error_data)));
-                 //   handler.post(() -> showMessage(context.getString(R.string.save_error_data) + "NOT DIRECTORY-TXT"));
-             //   }
 
             }else{
 

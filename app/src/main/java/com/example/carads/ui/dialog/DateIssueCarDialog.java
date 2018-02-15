@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.carads.R;
 import com.example.carads.ui.utilities.Constants;
 
@@ -25,9 +24,6 @@ public class DateIssueCarDialog extends DialogFragment {
 
 
     private DateIssueCarDialogListener dialogListener;
-//       private Spinner fromSpinner;
-//       private Spinner toSpinner;
-
 
     private String fromDate;
     private String toDate;

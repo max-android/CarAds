@@ -10,9 +10,7 @@ import com.example.carads.presenter.transmitters.TransmitterMessageFromPresenter
 import com.example.carads.ui.callbacks.GetFunc;
 import com.example.carads.ui.utilities.Constants;
 import com.example.carads.ui.utilities.Message;
-
 import javax.inject.Inject;
-
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

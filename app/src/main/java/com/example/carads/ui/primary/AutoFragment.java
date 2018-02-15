@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import com.bumptech.glide.RequestManager;
 import com.example.carads.R;
 import com.example.carads.model.storage.database.entity.Car;
@@ -23,10 +22,8 @@ import com.example.carads.ui.detail.DetailActivity;
 import com.example.carads.ui.search.AvtoAdapter;
 import com.example.carads.ui.search.SearchableActivity;
 import com.example.carads.ui.utilities.Constants;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.inject.Inject;
 
 
@@ -91,37 +88,28 @@ public class AutoFragment extends Fragment implements AvtoAdapter.CarClickListen
     }
 
 
-
-//KEY_AUTO_FR_POPULAR
-//TYPE_POPULAR_MARKA
     private void setListener(View view){
 
         switch (view.getId()){
 
            case  R.id.imageAudi:
-
                startActivity(new Intent(getContext(), SearchableActivity.class).putExtra(Constants.KEY_AUTO_FR_POPULAR,getContext().getString(R.string.audi)).setType(Constants.TYPE_POPULAR_MARKA));
-
             break;
 
             case  R.id.imageBmw:
                 startActivity(new Intent(getContext(), SearchableActivity.class).putExtra(Constants.KEY_AUTO_FR_POPULAR,getContext().getString(R.string.bmw)).setType(Constants.TYPE_POPULAR_MARKA));
-
                 break;
 
             case  R.id.imageMerc:
                 startActivity(new Intent(getContext(), SearchableActivity.class).putExtra(Constants.KEY_AUTO_FR_POPULAR,getContext().getString(R.string.mers)).setType(Constants.TYPE_POPULAR_MARKA));
-
                 break;
 
             case  R.id.imagePorc:
                 startActivity(new Intent(getContext(), SearchableActivity.class).putExtra(Constants.KEY_AUTO_FR_POPULAR,getContext().getString(R.string.porche)).setType(Constants.TYPE_POPULAR_MARKA));
-
                 break;
 
             case  R.id.imageInf:
                 startActivity(new Intent(getContext(), SearchableActivity.class).putExtra(Constants.KEY_AUTO_FR_POPULAR,getContext().getString(R.string.infinity)).setType(Constants.TYPE_POPULAR_MARKA));
-
                 break;
         }
     }
@@ -153,13 +141,11 @@ public class AutoFragment extends Fragment implements AvtoAdapter.CarClickListen
     }
 
 
-
     private void launchDetailCar(Car car,View view){
 
         ImageView imageView = (ImageView) view;
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),imageView,Constants.TRANSITION_IMAGE);
-
 
         Intent intent = new Intent(getContext(), DetailActivity.class);
 
